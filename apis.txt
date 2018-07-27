@@ -1,0 +1,31 @@
+Different values of currency
+================================================= 
+https://api.coinmarketcap.com/v1/ticker/?limit=20
+
+Perticular Currency
+====================================================
+https://api.coinmarketcap.com/v1/global/?convert=USD
+
+Websocket Data
+=====================================================
+https://min-api.cryptocompare.com/data/histominute?fsym=BTC&tsym=USD&limit=1399
+
+News
+=======================================
+https://www.blockchain.com/markets/news
+
+full market coin data
+============================================
+https://min-api.cryptocompare.com/data/pricemultifull?fsyms=BTC,ETH,XRP,BCH,EOS,XLM,LTC,ADA,IOT,USDT,TRX,XMR,NEO,DASH,ETC,XEM,XTZ,BNB,VEN,ZEC&tsyms=USD
+
+full coinlist
+===========================
+https://www.cryptocompare.com/api/data/coinlist/
+
+volume transaction
+====================================
+https://min-api.cryptocompare.com/data/top/totalvol?limit=50&tsym=USD
+
+market watch
+==================================================
+https://min-api.cryptocompare.com/data/top/exchanges/full?fsym=BTC&tsym=USD&limit=100

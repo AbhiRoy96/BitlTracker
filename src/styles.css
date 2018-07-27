@@ -1,1 +1,27 @@
-/* You can add global styles to this file, and also import other style files */
+/* Global styles to this app*/
+@import url('https://fonts.googleapis.com/css?family=Montserrat:100,200,300,400,500,600,700,900');
+
+body{
+    font-family: 'Montserrat', sans-serif;
+}
+
+a{
+    outline: 0;
+}
+
+textarea:hover, 
+input:hover, 
+textarea:active, 
+input:active, 
+textarea:focus, 
+input:focus,
+button:focus,
+button:active,
+button:hover,
+label:focus,
+.btn:active,
+.btn.active
+{
+    -webkit-box-shadow: none;
+    box-shadow: none !important;
+}

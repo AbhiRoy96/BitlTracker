@@ -1,0 +1,174 @@
+/* Extra small devices (portrait phones, less than 576px)
+/* Small devices (landscape phones, 576px and up) */
+@media (min-width: 320px) { 
+    .navbar{
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+    
+    .navbar-brand{
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: white;
+        margin: 1vh 0vw 1vh 5vw;
+    }
+
+    .navbar-brand:hover, .navbar-brand:focus, .navbar-brand:active{
+        text-decoration: none;
+    }
+    
+    .nav-item:hover, .nav-item:focus{
+        background-color: #131414;
+        color: white;
+    }
+
+    .navbar-toggler{
+        margin: 1vh 2vw !important;
+        border: 0;
+        outline: 0;
+    }
+
+    .nav-link{
+        margin-left: 8vw;
+    }
+}
+
+/* Small devices (landscape phones, 576px and up) */
+@media (min-width: 576px) { 
+    .navbar{
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+    
+    .navbar-brand{
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: white;
+        margin: 1vh 0vw 1vh 5vw;
+    }
+
+    .navbar-brand:hover, .navbar-brand:focus, .navbar-brand:active{
+        text-decoration: none;
+    }
+    
+    .nav-item:hover, .nav-item:focus{
+        background-color: #131414;
+        color: white;
+    }
+
+    .navbar-toggler{
+        margin: 1vh 2vw !important;
+        border: 0;
+        outline: 0;
+    }
+
+    .nav-link{
+        margin-left: 8vw;
+    }
+}
+
+
+
+/* Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) { 
+    .navbar{
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+    
+    .navbar-brand{
+        font-size: 1.3rem;
+        font-weight: 400;
+        color: white;
+        margin: 1vh 0vw 1vh 5vw;
+    }
+
+    .navbar-brand:hover, .navbar-brand:focus, .navbar-brand:active{
+        text-decoration: none;
+    }
+    
+    .nav-item:hover, .nav-item:focus{
+        background-color: #131414;
+        color: white;
+    }
+
+    .navbar-toggler{
+        margin: 1vh 2vw !important;
+        border: 0;
+        outline: 0;
+    }
+
+    .nav-link{
+        margin-left: 8vw;
+    }
+}
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) { 
+    .navbar{
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+    
+    .navbar-brand{
+        font-size: 1.7rem;
+        font-weight: 700;
+        color: white;
+        margin: 2vh 0vw 2vh 6vw;
+    }
+
+    .navbar-brand:hover, .navbar-brand:focus, .navbar-brand:active{
+        text-decoration: none;
+    }
+    
+    .nav-item:hover, .nav-item:focus{
+        background-color: transparent;
+        color: white;
+    }
+
+    .nav-link{
+        margin-left: 70vw;
+        font-size: 1.1rem;
+    }
+}
+
+
+
+
+/* Extra large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {
+    .navbar{
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+    
+    .navbar-brand{
+        font-size: 1.7rem;
+        font-weight: 700;
+        color: white;
+        margin: 2vh 0vw 2vh 6vw;
+    }
+
+    .navbar-brand:hover, .navbar-brand:focus, .navbar-brand:active{
+        text-decoration: none;
+    }
+    
+    .nav-item:hover, .nav-item:focus{
+        background-color: transparent;
+        color: white;
+    }
+
+    .nav-link{
+        margin-left: 72vw;
+        font-size: 1.1rem;
+    }
+}
+
+.custom-dark, .bg-custom{
+    background-color: rgb(53, 88, 168);
+    color: white;
+}
+
+
+
+
