@@ -1,0 +1,368 @@
+.mac-dash {
+    padding: 3vh 3vw;
+}
+
+.mac-dash h1{
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 5vh;
+}
+
+ul{
+    list-style: none;
+    padding: 0 !important;
+    margin: 0;
+}
+
+.row{
+    margin: 0;
+}
+
+.dash-col {
+    padding: 1vh 1vw;
+}
+
+.data-dash {
+    padding: 3vh 2vw;
+    box-shadow: 0px 0px 5px #c9c9c9
+}
+
+.data-dash h5 {
+    text-align: center;
+    font-weight: 700;
+    margin-bottom: 3vh;
+    color: #047dd4;
+
+}
+
+.data-dash:hover {
+    box-shadow: 0px 0px 5px #a7a5a5
+}
+
+.data-dash li{
+    padding: 2vh 2vw;
+    border-bottom: solid 1px #d3d3d3;
+}
+
+.data-dash li p{
+    margin: 0 !important;
+    font-weight: 300;
+    font-size: 1.3rem;
+}
+
+.data-dash i{
+    margin-right: 1vw;
+}
+
+.dateRange{
+    font-size: 0.9rem;
+}
+
+
+
+.header-block{
+    margin: 1vh 1vw 4vh 1vw;
+    border: solid 0.5px #d8d7d7;
+    padding: 2vh 2vw;
+}
+
+.bitcoin-value{
+    margin: 0;
+    font-size: 2.0rem;
+}
+
+.trend-24hrs{
+    font-size: 1.0rem;
+    font-weight: 500;
+    
+}
+
+.dn{
+    color: #df2626;
+}
+
+.up{
+    color: #1aa52d;
+}
+
+.market-sec{
+    margin: 1vh 0vw 1vh 0vw;
+}
+
+.bitcoin-value-sec{
+    font-size: 1.0rem;
+    font-weight: 600;
+    color: rgb(46, 46, 46);
+    margin-bottom: 1vh;
+}
+
+.Table i {
+    margin-right: 0.4vw;
+}
+
+.data-dash-3{
+    padding: 5vh 3vw;
+}
+
+.news-main{
+    padding: 0;
+    margin: 1vh 1vw 4vh 1vw;
+}
+
+
+
+.news p{
+    height: 20vh;
+}
+
+
+
+@media (min-width: 320px){
+    .bitcoin-price{
+        margin: 0vh 5vw 0vh 0vw;
+        font-size: 0.9rem;
+        color:#8d8d8d
+    
+    }
+
+    .data-dash-3 h5{
+        font-size: 1.25rem;
+        font-weight: 700;
+        text-align: left;
+        color: black;
+        padding-left: 2vw;
+    }
+
+    #canvas{
+        height: 30vh !important;
+    }
+
+
+    .Table
+    {
+        display: table;
+        width: 100%;
+    }
+    .Heading
+    {
+        display: table-row;
+        font-size: 0.7rem !important;
+        font-weight: 600;
+        color: #8d8d8d;
+        text-align: left;
+    }
+    .Row
+    {
+        display: table-row;
+    }
+    .Cell
+    {
+        display: table-cell;
+        border: 0;
+        border-width: thin;
+        font-size: 0.8rem;
+        padding-left: 3px;
+        padding-right: 3px;
+    }
+
+    .news{
+        background-color: #f5f7f9;
+        margin: 1vh 0.5vw 1vh 0.5vw;
+        padding: 4vh 6vw 2vh 5vw;
+    }
+
+    .ads{
+        padding: 2.5vh;
+    }    
+}
+
+
+@media (min-width: 576px){
+    .bitcoin-price{
+        margin: 0vh 1vw 0vh 0vw;
+        font-size: 0.9rem;
+        color:#8d8d8d
+    
+    }
+
+    .data-dash-2 h5{
+        font-size: 2.0rem;
+    }
+
+    .data-dash-3 h5{
+        font-size: 2.0rem;
+        font-weight: 300;
+        text-align: left;
+        color: black;
+    }
+
+    #canvas{
+        height: 43vh !important;
+    }
+    
+    
+    .Table
+    {
+        display: table;
+        width: 100%;
+    }
+    .Heading
+    {
+        display: table-row;
+        font-weight: bold;
+        text-align: left;
+    }
+    .Row
+    {
+        display: table-row;
+    }
+    .Cell
+    {
+        display: table-cell;
+        border: 0;
+        border-width: thin;
+        padding-left: 5px;
+        padding-right: 5px;
+    }
+
+    .news{
+        background-color: #f0f0f0;
+        margin: 1vh 0.5vw 1vh 0.5vw;
+        padding: 2vh 1vw 2vh 1vw;
+    }
+
+    .ads{
+        padding: 6vh;
+    }
+
+}
+
+
+@media (min-width: 1200px){
+    .bitcoin-price{
+        margin: 0vh 1vw 0vh 0vw;
+        font-size: 0.9rem;
+        color:#8d8d8d
+    
+    }
+
+    .data-dash-2 h5{
+        font-size: 2.2rem;
+    }
+
+    .data-dash-3 h5{
+        font-size: 2.0rem;
+        font-weight: 300;
+        text-align: left;
+        color: black;
+    }
+
+    #canvas{
+        height: 43vh !important;
+    }
+    
+
+    .Table
+    {
+        display: table;
+        width: 100%;
+    }
+    .Heading
+    {
+        display: table-row;
+        font-weight: bold;
+        text-align: left;
+    }
+    .Row
+    {
+        display: table-row;
+    }
+    .Cell
+    {
+        display: table-cell;
+        border: 0;
+        border-width: thin;
+        padding-left: 5px;
+        padding-right: 5px;
+    }
+
+    .news{
+        background-color: #f0f0f0;
+        margin: 1vh 0.5vw 1vh 0.5vw;
+        padding: 2.5vh 1vw 2vh 1.5vw;
+    }
+
+    .ads{
+        padding: 8vh;
+    }
+
+
+}
+
+@media (min-width: 1400px){
+    .bitcoin-price{
+        margin: 0vh 1vw 0vh 0vw;
+        font-size: 0.9rem;
+        color:#8d8d8d
+    
+    }
+
+    .data-dash-2 h5{
+        font-size: 2.2rem;
+    }
+
+    .data-dash-3 h5{
+        font-size: 2.0rem;
+        font-weight: 300;
+        text-align: left;
+        color: black;
+    }
+
+    #canvas{
+        height: 43vh !important;
+    }
+    
+
+    .Table
+    {
+        display: table;
+        width: 100%;
+        
+    }
+    .Heading
+    {
+        display: table-row;
+        font-size: 0.8rem !important;
+        font-weight: 600;
+        color: #8d8d8d;
+        text-align: left;
+    }
+    .Row
+    {
+        display: table-row;
+        margin-left: 4vw;
+    }
+    .Cell
+    {
+        display: table-cell;
+        border: 0;
+        border-width: thin;
+        font-size: 0.8rem !important;
+        padding-right: 1rem;
+    }
+
+    .news{
+        background-color: #f0f0f0;
+        margin: 1vh 0.5vw 1vh 0.5vw;
+        padding: 3vh 1vw 2vh 2vw;
+    }
+
+    .ads{
+        padding: 8vh;
+    }
+
+}
+
+    
+
+

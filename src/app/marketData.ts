@@ -6,8 +6,3 @@ export interface MarketData {
     'symbol': string;
 }
 
-
-export interface MarketPrice {
-    '0': number;
-    '1': number;
-}
