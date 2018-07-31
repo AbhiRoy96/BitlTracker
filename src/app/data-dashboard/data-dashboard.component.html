@@ -1,0 +1,231 @@
+<div class="mac-dash">
+  <div class="row header-block">
+        <div class="dash-col col-md-3">
+            <p class="bitcoin-price">BITCOIN PRICE</p>
+            <p class="bitcoin-value"><img src="https://www.cryptocompare.com{{coin_images.Data.BTC.ImageUrl}}" height="34px" width="34px" alt="Bitcoin"> {{bitcoinData.DISPLAY.BTC.USD.PRICE}} 
+              <em class="trend-24hrs" *ngIf="bitcoinData.RAW.BTC.USD.CHANGEPCT24HOUR >= 0; then thenBlock; else elseBlock"></em>
+              <ng-template #thenBlock><small class="trend-24hrs up"><i class="fas fa-caret-up"></i> {{bitcoinData.DISPLAY.BTC.USD.CHANGEPCT24HOUR}}%</small></ng-template>
+              <ng-template #elseBlock><small class="trend-24hrs dn"><i class="fas fa-caret-down"></i> {{bitcoinData.DISPLAY.BTC.USD.CHANGEPCT24HOUR}}%</small></ng-template>
+            </p>
+        </div>
+
+        <div class="dash-col col-md-3">
+            <p class="market-sec"><small class="bitcoin-price">MKT CAP</small><b class="bitcoin-value-sec">{{bitcoinData.DISPLAY.BTC.USD.MKTCAP}}</b></p>
+            <small class="bitcoin-price">CIRC SPLY</small><b class="bitcoin-value-sec">{{bitcoinData.RAW.BTC.USD.SUPPLY}} BTC</b>
+        </div>
+
+        <div class="dash-col col-md-3">
+            <p class="market-sec"><small class="bitcoin-price">24H VOL</small><b class="bitcoin-value-sec">{{bitcoinData.DISPLAY.BTC.USD.TOTALVOLUME24HTO}}</b></p>
+            <small class="bitcoin-price">LAST MKT</small><b class="bitcoin-value-sec">{{bitcoinData.DISPLAY.BTC.USD.LASTMARKET}}</b>
+        </div>
+
+        <div class="dash-col col-md-3">
+            <p class="market-sec"><small class="bitcoin-price">24H HIGH</small><b class="bitcoin-value-sec">{{bitcoinData.DISPLAY.BTC.USD.HIGH24HOUR}}</b></p>
+            <small class="bitcoin-price">24H LOW</small><b class="bitcoin-value-sec">{{bitcoinData.DISPLAY.BTC.USD.LOW24HOUR}}</b>
+        </div>
+    
+  </div>
+  
+  
+  
+  
+  <div class="row">
+    
+    <div class=" dash-col col-md-3">
+      <div class="data-dash">
+        <h5><i class="fab fa-gg"></i>Prices Against different currency</h5>
+        
+        <ul>
+          <li><p><i class="fas fa-dollar-sign"></i> {{bitcoinData.RAW.BTC.USD.PRICE.toPrecision(6)}}</p></li>
+          <li><p><i class="fas fa-pound-sign"></i> {{coinbase.GBP.last.toPrecision(6)}}</p></li>
+          <li><p><i class="fas fa-euro-sign"></i> {{coinbase.EUR.last.toPrecision(6)}}</p></li>
+          <li><p><i class="fas fa-yen-sign"></i> {{coinbase.JPY.last.toPrecision(8)}}</p></li>
+          <li style="border-bottom: 0;"><p><i class="fas fa-ruble-sign"></i> {{coinbase.RUB.last.toPrecision(8)}}</p></li>
+        </ul>
+
+        
+      </div>
+    </div>
+
+    <div class="dash-col col-md-9">
+      <div class=" data-dash data-dash-2">
+        <h5><i class="fas fa-chart-line"></i> Bitcoin Market Trends</h5>
+        <!-- Buttons for updating chart-->
+
+          <div *ngIf="chart">
+            <canvas id="canvas">{{ chart }}</canvas>
+          </div>
+
+        
+
+      </div>
+    </div>
+  </div>
+
+
+  <br>
+  <div class="row">
+    
+    <div class="dash-col col-md-4">
+      <div class=" data-dash">
+        <h5><i class="fas fa-th-list"></i>Top 10 Leaderboard</h5>
+
+        <div class="Table">
+          <div class="Heading">
+            <div class="Cell">
+              <p>NAME</p>
+            </div>
+            <div class="Cell">
+              <p>PRICE</p>
+            </div>
+            <div class="Cell">
+              <p>24H CHG</p>
+            </div>
+          </div>
+            
+          <!-- the ngfor from here -->
+
+          <div class="Row" *ngFor="let coin_data_info of coinInfoData">
+            <div class="Cell">
+              <p><img src="https://www.cryptocompare.com{{coin_data_info.imageUrl}}" height="25px" width="25px" style="margin-right: 1vw;" alt="{{coin_data_info.name}}"> <b>{{coin_data_info.name}}</b></p>
+            </div>
+            <div class="Cell">
+              <p>{{coin_data_info.price}}</p>
+            </div>
+            <div class="Cell">
+                <p *ngIf="coin_data_info.trend == 1; then thenBlock; else elseBlock"></p>
+                <ng-template #thenBlock><p class="up"><i class="fas fa-caret-up"></i> {{coin_data_info.change24H}}%</p></ng-template>
+                <ng-template #elseBlock><p class="dn"><i class="fas fa-caret-down"></i> {{coin_data_info.change24H}}%</p></ng-template>
+              </div>
+
+          </div>
+          <!-- row ends -->
+        </div>
+
+      </div>
+    </div>
+
+    <div class="dash-col col-md-4">
+      <div class=" data-dash">
+        <h5><img src="https://www.cryptocompare.com{{coin_images.Data.BTC.ImageUrl}}" height="25px" width="25px" style="margin-right: 1vw;" alt="Bitcoin">BTC Top Markets</h5>
+
+        <div class="Table">
+          <div class="Heading">
+            <div class="Cell">
+              <p>EXCHANGE</p>
+            </div>
+            <div class="Cell">
+              <p>BUY/SELL</p>
+            </div>
+            <div class="Cell" style="padding-right: 6px;">
+              <p>PRICE (USD)</p>
+            </div>
+            <div class="Cell">
+              <p>24H VOL</p>
+            </div>
+          </div>
+          
+          <!-- the ngfor from here -->
+          <div class="Row">
+            <div class="Cell">
+              <p>Bitfinex</p>
+            </div>
+            <div class="Cell">
+              <p><i class="fas fa-caret-down"></i>   BUY</p>
+            </div>
+            <div class="Cell">
+              <p>$8,208.60</p>
+            </div>
+            <div class="Cell">
+              <p>$228,444,988</p>
+            </div>
+          </div>
+          <!-- row ends -->
+        </div>
+      </div>
+    </div>
+
+    <div class="dash-col col-md-4">
+      <div class=" data-dash">
+        <h5><img src="https://www.cryptocompare.com{{coin_images.Data.BTC.ImageUrl}}" height="25px" width="25px" style="margin-right: 1vw;" alt="Bitcoin">Live Trade History</h5>
+
+        <div class="Table">
+          <div class="Heading">
+            <div class="Cell">
+              <p>DATE</p>
+            </div>
+            <div class="Cell">
+              <p>BUY/SELL</p>
+            </div>
+            <div class="Cell">
+              <p>PRICE (USD)</p>
+            </div>
+            <div class="Cell">
+              <p>AMOUNT (USD)</p>
+            </div>
+           </div>
+            
+          <!-- the ngfor from here -->
+          <div class="Row">
+            <div class="Cell">
+              <p>Bitfinex</p>
+            </div>
+            <div class="Cell">
+              <p><i class="fas fa-caret-down"></i>   BUY</p>
+            </div>
+            <div class="Cell">
+              <p>$8,208.60</p>
+            </div>
+            <div class="Cell">
+              <p>$228,444,988</p>
+            </div>
+          </div>
+          <!-- row ends -->
+        </div>
+
+
+      </div>
+    </div>
+
+  </div>
+
+
+  <br>
+  <div class="row">
+
+      <div class="col-md-8 news-main">
+        <div class=" data-dash data-dash-3">
+          <h5> Digital Currency News</h5>
+
+          <div class="row">
+            <div class="col-md-4 news">
+              <small>Blokt</small>
+              <p><b>Bitfinex Brings Ambitious EOSIO Collab to the World, Names It EOSfinex</b></p>
+              <br>
+              <a href="#">Read Article <i class="fas fa-arrow-circle-up"></i></a>
+            </div>
+
+            <div class="col-md-4 news">
+              <small>Blokt</small>
+              <p><b>Bitfinex Brings Ambitious EOSIO Collab to the World, Names It EOSfinex</b></p>
+              <br>
+              <a href="#">Read Article <i class="fas fa-arrow-circle-up"></i></a>
+            </div>
+
+            <div class="col-md-3 news">
+              <small>Blokt</small>
+              <p><b>Bitfinex Brings Ambitious EOSIO Collab to the World, Names It EOSfinex</b></p>
+              <br>
+              <a href="#">Read Article <i class="fas fa-arrow-circle-up"></i></a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <div class="col-md-3 ads">
+          <iframe src="https://bci-ads.blockchain.info/bci-ads/iframe/7" frameborder="0" height="300" width="300"></iframe>
+      </div>
+
+
+  </div>
+</div>
