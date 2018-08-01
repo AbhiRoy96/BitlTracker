@@ -1,7 +1,7 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { interval } from 'rxjs/observable/interval';
 
-import { CoinDataFetched } from '../marketData';
+import { CoinDataFetched, News } from '../marketData';
 import { Chart } from 'chart.js';
 import { LivedataService } from '../livedata.service';
 
@@ -25,6 +25,10 @@ export class DataDashboardComponent implements OnInit, AfterViewInit {
   coinInfoData: CoinDataFetched[] = [];
   coinsList: any[] = [];
 
+  marketExchanges: any;
+  tempNews: any;
+  news: News[] = [];
+
   tempData: any;
 
   startingDate: any;
@@ -38,6 +42,7 @@ export class DataDashboardComponent implements OnInit, AfterViewInit {
     this.bitcoinDataPrice();
     this.coinImages();
     this.topCoinHunter();
+    this.marketExchange();
   }
 
   ngOnInit() {
@@ -45,6 +50,8 @@ export class DataDashboardComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
+    // this.getLiveNews();
+
     interval(2000 * 60).subscribe(x => {
       this.updateChartData();
     });
@@ -53,6 +60,7 @@ export class DataDashboardComponent implements OnInit, AfterViewInit {
       this.bitcoinDataPrice();
       this.exchangeRates();
       this.topCoinHunterUpdater(this.coinsList);
+      this.marketExchange();
     });
   }
 
@@ -103,7 +111,6 @@ export class DataDashboardComponent implements OnInit, AfterViewInit {
 
               coin_update.price = this.live_coins_info.DISPLAY[coin_update.name].USD.PRICE;
               coin_update.change24H = this.live_coins_info.DISPLAY[coin_update.name].USD.CHANGEPCT24HOUR;
-              console.log(this.live_coins_info.DISPLAY[coin_update.name].USD.CHANGEPCT24HOUR);
 
 
               if (this.live_coins_info.RAW[coin_update.name].USD.CHANGEPCT24HOUR >= 0) {
@@ -116,7 +123,6 @@ export class DataDashboardComponent implements OnInit, AfterViewInit {
 
       });
 
-      console.log(this.coinInfoData);
   }
 
   topCoinHunterUpdater(coinsList) {
@@ -127,7 +133,6 @@ export class DataDashboardComponent implements OnInit, AfterViewInit {
 
           coin_update.price = this.live_coins_info.DISPLAY[coin_update.name].USD.PRICE;
           coin_update.change24H = this.live_coins_info.DISPLAY[coin_update.name].USD.CHANGEPCT24HOUR;
-          console.log(this.live_coins_info.DISPLAY[coin_update.name].USD.CHANGEPCT24HOUR);
 
 
           if (this.live_coins_info.RAW[coin_update.name].USD.CHANGEPCT24HOUR >= 0) {
@@ -138,6 +143,30 @@ export class DataDashboardComponent implements OnInit, AfterViewInit {
         });
       });
   }
+
+
+  marketExchange() {
+    this.coinService.getExchangeData()
+      .subscribe( data => {
+        this.marketExchanges = data;
+      });
+  }
+
+  // getLiveNews() {
+  //   this.coinService.getNewsUpdates()
+  //     .subscribe( data => {
+  //       this.tempNews = data;
+  //       let ctr = 0;
+  //       this.tempNews.results.forEach(newsItem => {
+  //         if (ctr < 3) {
+  //           const newNews = new News(newsItem.source.title, newsItem.title, newsItem.url);
+  //           this.news.push(newNews);
+  //           ctr ++;
+  //         }
+  //       });
+  //       console.log(this.news);
+  //     });
+  // }
 
 
   marketChartDisplay() {

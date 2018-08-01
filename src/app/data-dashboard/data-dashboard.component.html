@@ -1,4 +1,6 @@
 <div class="mac-dash">
+
+  <!-- Top data ~ Bitcoin, etc -->
   <div class="row header-block">
         <div class="dash-col col-md-3">
             <p class="bitcoin-price">BITCOIN PRICE</p>
@@ -11,7 +13,7 @@
 
         <div class="dash-col col-md-3">
             <p class="market-sec"><small class="bitcoin-price">MKT CAP</small><b class="bitcoin-value-sec">{{bitcoinData.DISPLAY.BTC.USD.MKTCAP}}</b></p>
-            <small class="bitcoin-price">CIRC SPLY</small><b class="bitcoin-value-sec">{{bitcoinData.RAW.BTC.USD.SUPPLY}} BTC</b>
+            <small class="bitcoin-price">CIRC SPLY</small><b class="bitcoin-value-sec">{{bitcoinData.RAW.BTC.USD.SUPPLY| currency:' '}} BTC</b>
         </div>
 
         <div class="dash-col col-md-3">
@@ -26,9 +28,8 @@
     
   </div>
   
-  
-  
-  
+
+  <!-- Live Data and Graph -->
   <div class="row">
     
     <div class=" dash-col col-md-3">
@@ -61,10 +62,11 @@
       </div>
     </div>
   </div>
-
-
   <br>
-  <div class="row">
+
+
+  <!-- Data of Live markets, Top Transactions, etc. -->
+  <div class="row format-height">
     
     <div class="dash-col col-md-4">
       <div class=" data-dash">
@@ -111,33 +113,35 @@
 
         <div class="Table">
           <div class="Heading">
-            <div class="Cell">
+            <div class="Cell headingTransc">
               <p>EXCHANGE</p>
             </div>
-            <div class="Cell">
+            <div class="Cell headingTransc" style="padding-right: 5px;">
               <p>BUY/SELL</p>
             </div>
-            <div class="Cell" style="padding-right: 6px;">
+            <div class="Cell headingTransc" style="padding-right: 5px;">
               <p>PRICE (USD)</p>
             </div>
-            <div class="Cell">
+            <div class="Cell headingTransc">
               <p>24H VOL</p>
             </div>
           </div>
           
           <!-- the ngfor from here -->
-          <div class="Row">
+          <div class="Row" *ngFor="let exchange_data of marketExchanges.Data.Exchanges">
             <div class="Cell">
-              <p>Bitfinex</p>
+              <p><b>{{exchange_data.MARKET.substring(0, 10)}}</b></p>
             </div>
             <div class="Cell">
-              <p><i class="fas fa-caret-down"></i>   BUY</p>
+              <p *ngIf="exchange_data.FLAGS > 1; then thenBlock; else elseBlock"></p>
+              <ng-template #thenBlock><p class="up"><i class="fas fa-caret-up"></i> BUY</p></ng-template>
+              <ng-template #elseBlock><p class="dn"><i class="fas fa-caret-down"></i> SELL</p></ng-template>
             </div>
-            <div class="Cell">
-              <p>$8,208.60</p>
+            <div class="Cell volumeTransc">
+              <p>{{exchange_data.PRICE.toFixed(2)| currency}}</p>
             </div>
-            <div class="Cell">
-              <p>$228,444,988</p>
+            <div class="Cell volumeTransc">
+              <p>{{exchange_data.VOLUME24HOURTO.toFixed(2)| currency}}</p>
             </div>
           </div>
           <!-- row ends -->
@@ -188,9 +192,10 @@
     </div>
 
   </div>
-
-
   <br>
+
+
+  <!-- News and ads.. -->
   <div class="row">
 
       <div class="col-md-8 news-main">
@@ -228,4 +233,6 @@
 
 
   </div>
+
+
 </div>

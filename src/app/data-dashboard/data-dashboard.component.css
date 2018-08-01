@@ -115,13 +115,25 @@ ul{
     height: 20vh;
 }
 
+.format-height{
+    line-height: 2.2;
+}
+
+.headingTransc{
+    font-size: 0.8rem !important;
+}
+
+.volumeTransc{
+    font-size: 0.8rem !important;
+}
+
 
 
 @media (min-width: 320px){
     .bitcoin-price{
         margin: 0vh 5vw 0vh 0vw;
         font-size: 0.9rem;
-        color:#8d8d8d
+        color:#8d8d8d;
     
     }
 
@@ -350,6 +362,15 @@ ul{
         font-size: 0.8rem !important;
         padding-right: 1rem;
     }
+
+    .headingTransc{
+        font-size: 0.78rem !important;
+    }
+
+    .volumeTransc{
+        font-size: 0.75rem !important;
+    }
+    
 
     .news{
         background-color: #f0f0f0;

@@ -22,3 +22,16 @@ export class CoinDataFetched {
     }
 
 }
+
+export class News {
+    public newsSource: string;
+    public newsHeadline: string;
+    public newsLink: string;
+
+    constructor(src, topic, link) {
+        this.newsSource = src;
+        this.newsHeadline = topic;
+        this.newsLink = link;
+    }
+}
+
