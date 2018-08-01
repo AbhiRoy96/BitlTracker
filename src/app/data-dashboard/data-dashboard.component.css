@@ -258,6 +258,11 @@ ul{
     
     }
 
+    .bitcoin-value{
+        margin: 0;
+        font-size: 1.7rem;
+    }
+
     .data-dash-2 h5{
         font-size: 2.2rem;
     }
@@ -294,11 +299,20 @@ ul{
         display: table-cell;
         border: 0;
         border-width: thin;
-        padding-left: 5px;
-        padding-right: 5px;
+        padding-left: 3px;
+        padding-right: 3px;
+    }
+
+    .headingTransc{
+        font-size: 0.76rem !important;
+    }
+
+    .volumeTransc{
+        font-size: 0.75rem !important;
     }
 
     .news{
+        max-width: 31.333% !important;
         background-color: #f0f0f0;
         margin: 1vh 0.5vw 1vh 0.5vw;
         padding: 2.5vh 1vw 2vh 1.5vw;
@@ -317,6 +331,11 @@ ul{
         font-size: 0.9rem;
         color:#8d8d8d
     
+    }
+
+    .bitcoin-value{
+        margin: 0;
+        font-size: 2.0rem;
     }
 
     .data-dash-2 h5{
@@ -373,9 +392,10 @@ ul{
     
 
     .news{
+        max-width: 31.333% !important;
         background-color: #f0f0f0;
         margin: 1vh 0.5vw 1vh 0.5vw;
-        padding: 3vh 1vw 2vh 2vw;
+        padding: 3vh 2vw 2vh 2vw;
     }
 
     .ads{

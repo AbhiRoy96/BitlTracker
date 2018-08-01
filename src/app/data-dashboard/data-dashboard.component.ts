@@ -36,13 +36,12 @@ export class DataDashboardComponent implements OnInit, AfterViewInit {
 
 
   constructor(private coinService: LivedataService) {
-
-    // this.coinInfo = new CoinDataFetched();
     this.exchangeRates();
     this.bitcoinDataPrice();
     this.coinImages();
     this.topCoinHunter();
     this.marketExchange();
+    this.getLiveNews();
   }
 
   ngOnInit() {
@@ -50,8 +49,6 @@ export class DataDashboardComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    // this.getLiveNews();
-
     interval(2000 * 60).subscribe(x => {
       this.updateChartData();
     });
@@ -152,21 +149,20 @@ export class DataDashboardComponent implements OnInit, AfterViewInit {
       });
   }
 
-  // getLiveNews() {
-  //   this.coinService.getNewsUpdates()
-  //     .subscribe( data => {
-  //       this.tempNews = data;
-  //       let ctr = 0;
-  //       this.tempNews.results.forEach(newsItem => {
-  //         if (ctr < 3) {
-  //           const newNews = new News(newsItem.source.title, newsItem.title, newsItem.url);
-  //           this.news.push(newNews);
-  //           ctr ++;
-  //         }
-  //       });
-  //       console.log(this.news);
-  //     });
-  // }
+  getLiveNews() {
+    this.coinService.getNewsUpdates()
+      .subscribe( data => {
+        this.tempNews = data;
+        let ctr = 0;
+        this.tempNews.Data.forEach(newsItem => {
+          if (ctr < 3) {
+            const newNews = new News(newsItem.source_info.name, newsItem.title, newsItem.url);
+            this.news.push(newNews);
+            ctr ++;
+          }
+        });
+      });
+  }
 
 
   marketChartDisplay() {
@@ -192,9 +188,6 @@ export class DataDashboardComponent implements OnInit, AfterViewInit {
         // tslint:disable-next-line:prefer-const
         let requestDates = [];
         dateStamp.forEach((dt) => {
-              // tslint:disable-next-line:prefer-const
-              // let jsdate = new Date(dt * 1000).toLocaleTimeString();
-
               // tslint:disable-next-line:prefer-const
               let newjsDate: any;
               // tslint:disable-next-line:prefer-const
@@ -312,9 +305,6 @@ export class DataDashboardComponent implements OnInit, AfterViewInit {
         // tslint:disable-next-line:prefer-const
         let requestDates = [];
         dateStamp.forEach((dt) => {
-              // tslint:disable-next-line:prefer-const
-              // let jsdate = new Date(dt * 1000).toLocaleTimeString();
-
               // tslint:disable-next-line:prefer-const
               let newjsDate: any;
               // tslint:disable-next-line:prefer-const

@@ -10,6 +10,7 @@ import { DataDashboardComponent } from './data-dashboard/data-dashboard.componen
 
 
 import { LivedataService } from './livedata.service';
+import { SocketServiceService } from './socket-service.service';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { LivedataService } from './livedata.service';
     HttpClientModule,
   ],
   providers: [
-    LivedataService
+    LivedataService,
+    SocketServiceService
   ],
   bootstrap: [AppComponent]
 })

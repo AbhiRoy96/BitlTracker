@@ -18,7 +18,7 @@ export class LivedataService {
   private _coinDetailsURL = 'https://min-api.cryptocompare.com/data/all/coinlist';
   private _topCoins = 'https://min-api.cryptocompare.com/data/top/totalvol?limit=50&tsym=USD';
   private _exchange = 'https://min-api.cryptocompare.com/data/top/exchanges/full?fsym=BTC&tsym=USD&limit=10';
-  private _news = 'https://www.blockchain.com/markets/news';
+  private _news = 'https://min-api.cryptocompare.com/data/v2/news/?lang=EN';
 
   getMarketData(): Observable<MarketData> {
     return this.http.get<MarketData>(this._url);
@@ -54,8 +54,8 @@ export class LivedataService {
       .map(result => result);
   }
 
-  // getNewsUpdates() {
-  //   return this.http.get('http://localhost:3000/news')
-  //     .map(result => result);
-  // }
+  getNewsUpdates() {
+    return this.http.get(this._news)
+      .map(result => result);
+  }
 }
