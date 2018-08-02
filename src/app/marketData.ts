@@ -35,3 +35,21 @@ export class News {
     }
 }
 
+export enum Event {
+    CONNECT = 'connect',
+    DISCONNECT = 'disconnect'
+}
+
+export class Tradings {
+    public tradeTime: string;
+    public exchange: string;
+    public flag: number;
+    public totalValue: number;
+
+    constructor(timr, exchg, flg, valur) {
+        this.tradeTime = timr;
+        this.exchange = exchg;
+        this.flag = flg;
+        this.totalValue = valur;
+    }
+}

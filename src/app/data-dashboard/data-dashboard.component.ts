@@ -1,9 +1,12 @@
-import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit, OnDestroy } from '@angular/core';
 import { interval } from 'rxjs/observable/interval';
 
-import { CoinDataFetched, News } from '../marketData';
+import { CoinDataFetched, News, Event, Tradings } from '../marketData';
 import { Chart } from 'chart.js';
+
 import { LivedataService } from '../livedata.service';
+import { SocketServiceService } from '../socket-service.service';
+
 
 
 @Component({
@@ -15,6 +18,8 @@ import { LivedataService } from '../livedata.service';
 
 export class DataDashboardComponent implements OnInit, AfterViewInit {
 
+  oldPoints: number;
+  chartPoints: number;
   chart = [];
   coinbase: any;
   bitcoinData: any;
@@ -24,6 +29,9 @@ export class DataDashboardComponent implements OnInit, AfterViewInit {
 
   coinInfoData: CoinDataFetched[] = [];
   coinsList: any[] = [];
+
+  ioConn: any;
+  trades: Tradings[] = [];
 
   marketExchanges: any;
   tempNews: any;
@@ -35,13 +43,16 @@ export class DataDashboardComponent implements OnInit, AfterViewInit {
   endingDate: any;
 
 
-  constructor(private coinService: LivedataService) {
+  constructor(private coinService: LivedataService, private webSocketService: SocketServiceService) {
+    this.chartPoints = 60;
+    this.oldPoints = 60;
     this.exchangeRates();
     this.bitcoinDataPrice();
     this.coinImages();
     this.topCoinHunter();
     this.marketExchange();
     this.getLiveNews();
+    this.initIOConn();
   }
 
   ngOnInit() {
@@ -60,6 +71,7 @@ export class DataDashboardComponent implements OnInit, AfterViewInit {
       this.marketExchange();
     });
   }
+
 
 
   exchangeRates() {
@@ -82,6 +94,37 @@ export class DataDashboardComponent implements OnInit, AfterViewInit {
       .subscribe(data => {
         this.coin_images = data;
       });
+  }
+
+  chartdataData(points) {
+    if (this.chartPoints === 60) {
+      document.getElementById('hr1').classList.remove('chart-button-active');
+    } else if (this.chartPoints === 1440) {
+      document.getElementById('dy1').classList.remove('chart-button-active');
+    } else if (this.chartPoints === 10080) {
+      document.getElementById('we1').classList.remove('chart-button-active');
+    } else if (this.chartPoints === 43200) {
+      document.getElementById('mo1').classList.remove('chart-button-active');
+    } else {
+      document.getElementById('yr1').classList.remove('chart-button-active');
+    }
+
+    if (points === 60) {
+      document.getElementById('hr1').classList.add('chart-button-active');
+    } else if (points === 1440) {
+      document.getElementById('dy1').classList.add('chart-button-active');
+    } else if (points === 10080) {
+      document.getElementById('we1').classList.add('chart-button-active');
+    } else if (points === 43200) {
+      document.getElementById('mo1').classList.add('chart-button-active');
+    } else {
+      document.getElementById('yr1').classList.add('chart-button-active');
+    }
+    this.oldPoints = this.chartPoints;
+    this.chartPoints = points;
+
+    console.log(this.chartPoints);
+    this.updateChartData();
   }
 
 
@@ -165,9 +208,62 @@ export class DataDashboardComponent implements OnInit, AfterViewInit {
   }
 
 
+  initIOConn() {
+    this.webSocketService.initSocket();
+    this.webSocketService.onEvent(Event.CONNECT)
+      .subscribe(() => {
+        // console.log('Connected to the server');
+    });
+
+    this.webSocketService.conn_broker()
+      .subscribe(data => {
+        const local_sub: any = data;
+
+        // console.log(local_sub.USD.TRADES);
+
+        this.webSocketService.send(local_sub.USD.TRADES);
+
+
+        this.ioConn = this.webSocketService.onMessage()
+          .subscribe(message => {
+            if (this.trades.length > 9) {
+              this.trades.shift();
+            }
+
+            const res = message.split('~');
+            // tslint:disable-next-line:radix
+            const d = new Date(parseInt(res[6]));
+            const timeStr = d.getUTCHours() + ':' + d.getUTCMinutes() + ':' + d.getUTCSeconds();
+            // tslint:disable-next-line:radix
+            const nTrade = new Tradings(timeStr, res[1], parseInt(res[4]), parseFloat(res[9]));
+            this.trades.push(nTrade);
+
+
+
+
+            // shorter test code
+
+
+            // if (this.trades.length < 10) {
+            // const res = message.split('~');
+            // // tslint:disable-next-line:radix
+            // const d = new Date(parseInt(res[6]));
+            // const timeStr = d.getUTCHours() + ':' + d.getUTCMinutes() + ':' + d.getUTCSeconds();
+            // // tslint:disable-next-line:radix
+            // const nTrade = new Tradings(timeStr, res[1], parseInt(res[4]), parseFloat(res[9]));
+            // this.trades.push(nTrade);
+            // }
+          });
+
+          // console.log(this.trades);
+      });
+
+  }
+
+
   marketChartDisplay() {
 
-    this.coinService.dailyMarketdata()
+    this.coinService.dailyMarketdata(this.chartPoints.toString())
       .subscribe(res => {
 
         // tslint:disable-next-line:prefer-const
@@ -284,7 +380,7 @@ export class DataDashboardComponent implements OnInit, AfterViewInit {
 
   updateChartData() {
 
-    this.coinService.dailyMarketdata()
+    this.coinService.dailyMarketdata(this.chartPoints.toString())
       .subscribe(res => {
 
         // tslint:disable-next-line:prefer-const
@@ -326,10 +422,19 @@ export class DataDashboardComponent implements OnInit, AfterViewInit {
               requestDates.push(newjsDate);
         });
 
+
         // Redrawing the Chart
-        requestDates.forEach(element => {
-          this.removeData(this.chart);
-        });
+        if (this.oldPoints === this.chartPoints) {
+          requestDates.forEach(element => {
+            this.removeData(this.chart);
+          });
+        } else {
+          for (let i = 0; i <= this.oldPoints; i++) {
+            this.removeData(this.chart);
+          }
+          this.oldPoints = this.chartPoints;
+        }
+
 
         let item = 0;
         for (item = 0; item < requestDates.length; item++) {
@@ -354,6 +459,14 @@ export class DataDashboardComponent implements OnInit, AfterViewInit {
           dataset.data.pop();
       });
       chart.update();
+  }
+
+  // tslint:disable-next-line:use-life-cycle-interface
+  ngOnDestroy() {
+    this.webSocketService.onEvent(Event.DISCONNECT)
+      .subscribe(() => {
+        // console.log('Connected to the server');
+    });
   }
 
 }

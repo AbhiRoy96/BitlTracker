@@ -1,7 +1,7 @@
 <div class="mac-dash">
 
   <!-- Top data ~ Bitcoin, etc -->
-  <div class="row header-block">
+  <div class="row header-block" *ngIf="bitcoinData && coin_images">
         <div class="dash-col col-md-3">
             <p class="bitcoin-price">BITCOIN PRICE</p>
             <p class="bitcoin-value"><img src="https://www.cryptocompare.com{{coin_images.Data.BTC.ImageUrl}}" height="34px" width="34px" alt="Bitcoin"> {{bitcoinData.DISPLAY.BTC.USD.PRICE}} 
@@ -36,12 +36,13 @@
       <div class="data-dash">
         <h5><i class="fab fa-gg"></i>Prices Against different currency</h5>
         
-        <ul>
-          <li><p><i class="fas fa-dollar-sign"></i> {{bitcoinData.RAW.BTC.USD.PRICE.toPrecision(6)}}</p></li>
-          <li><p><i class="fas fa-pound-sign"></i> {{coinbase.GBP.last.toPrecision(6)}}</p></li>
-          <li><p><i class="fas fa-euro-sign"></i> {{coinbase.EUR.last.toPrecision(6)}}</p></li>
-          <li><p><i class="fas fa-yen-sign"></i> {{coinbase.JPY.last.toPrecision(8)}}</p></li>
-          <li style="border-bottom: 0;"><p><i class="fas fa-ruble-sign"></i> {{coinbase.RUB.last.toPrecision(8)}}</p></li>
+        <ul *ngIf="coinbase">
+          <li><p><i class="fas fa-rupee-sign"></i> {{coinbase.INR.last| currency:' '}}</p></li>
+          <li><p><i class="fas fa-dollar-sign"></i> {{coinbase.CAD.last| currency:'CAD'}}</p></li>
+          <li><p><i class="fas fa-pound-sign"></i> {{coinbase.GBP.last| currency:' '}}</p></li>
+          <li><p><i class="fas fa-euro-sign"></i> {{coinbase.EUR.last| currency:' '}}</p></li>
+          <li><p><i class="fas fa-yen-sign"></i> {{coinbase.JPY.last| currency:' '}}</p></li>
+          <li style="border-bottom: 0;"><p><i class="fas fa-ruble-sign"></i> {{coinbase.RUB.last| currency:' '}}</p></li>
         </ul>
 
         
@@ -52,7 +53,11 @@
       <div class=" data-dash data-dash-2">
         <h5><i class="fas fa-chart-line"></i> Bitcoin Market Trends</h5>
         <!-- Buttons for updating chart-->
-
+        <div class="chart-view-select">
+          <button id="hr1" class="btn btn-options chart-buttons chart-button-active" (click)="chartdataData(60)">1 Hour</button>
+          <button id="dy1" class="btn btn-options chart-buttons" (click)="chartdataData(1440)">1 Day</button>
+        </div>
+        <!-- chart plot -->
           <div *ngIf="chart">
             <canvas id="canvas">{{ chart }}</canvas>
           </div>
@@ -66,10 +71,10 @@
 
 
   <!-- Data of Live markets, Top Transactions, etc. -->
-  <div class="row format-height">
+  <div class="row format-height" *ngIf="coin_images">
     
     <div class="dash-col col-md-4">
-      <div class=" data-dash">
+      <div class=" data-dash" *ngIf="coinInfoData">
         <h5><i class="fas fa-th-list"></i>Top 10 Leaderboard</h5>
 
         <div class="Table">
@@ -108,7 +113,7 @@
     </div>
 
     <div class="dash-col col-md-4">
-      <div class=" data-dash">
+      <div class=" data-dash" *ngIf="marketExchanges">
         <h5><img src="https://www.cryptocompare.com{{coin_images.Data.BTC.ImageUrl}}" height="25px" width="25px" style="margin-right: 1vw;" alt="Bitcoin">BTC Top Markets</h5>
 
         <div class="Table">
@@ -150,38 +155,40 @@
     </div>
 
     <div class="dash-col col-md-4">
-      <div class=" data-dash">
+      <div class=" data-dash" *ngIf="trades">
         <h5><img src="https://www.cryptocompare.com{{coin_images.Data.BTC.ImageUrl}}" height="25px" width="25px" style="margin-right: 1vw;" alt="Bitcoin">Live Trade History</h5>
 
         <div class="Table">
           <div class="Heading">
             <div class="Cell">
-              <p>DATE</p>
+              <p>EXCHANGE</p>
             </div>
             <div class="Cell">
               <p>BUY/SELL</p>
             </div>
             <div class="Cell">
-              <p>PRICE (USD)</p>
+              <p>TIME</p>
             </div>
             <div class="Cell">
-              <p>AMOUNT (USD)</p>
+              <p>TOTAL (USD)</p>
             </div>
            </div>
             
           <!-- the ngfor from here -->
-          <div class="Row">
+          <div class="Row" *ngFor="let trade_data of trades">
             <div class="Cell">
-              <p>Bitfinex</p>
+              <p><b>{{trade_data.exchange.substring(0, 10)}}</b></p>
             </div>
             <div class="Cell">
-              <p><i class="fas fa-caret-down"></i>   BUY</p>
+              <p *ngIf="trade_data.flag > 1; then thenBlock; else elseBlock"></p>
+              <ng-template #thenBlock><p class="up"><i class="fas fa-caret-up"></i> BUY</p></ng-template>
+              <ng-template #elseBlock><p class="dn"><i class="fas fa-caret-down"></i> SELL</p></ng-template>
             </div>
-            <div class="Cell">
-              <p>$8,208.60</p>
+            <div class="Cell volumeTransc">
+              <p>{{trade_data.tradeTime}}</p>
             </div>
-            <div class="Cell">
-              <p>$228,444,988</p>
+            <div class="Cell volumeTransc">
+              <p>{{trade_data.totalValue| currency}}</p>
             </div>
           </div>
           <!-- row ends -->
@@ -196,13 +203,13 @@
 
 
   <!-- News and ads.. -->
-  <div class="row">
+  <div class="row" *ngIf="coin_images">
 
       <div class="col-md-8 news-main">
         <div class=" data-dash data-dash-3">
           <h5> Digital Currency News</h5>
 
-          <div class="row">
+          <div class="row" *ngIf="news">
             <div class="col-md-4 news" *ngFor="let news_data of news">
               <small>{{news_data.newsSource}}</small>
               <p><b>{{news_data.newsHeadline}}</b></p>

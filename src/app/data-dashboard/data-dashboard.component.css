@@ -47,7 +47,7 @@ ul{
 .data-dash li p{
     margin: 0 !important;
     font-weight: 300;
-    font-size: 1.3rem;
+    font-size: 1.15rem;
 }
 
 .data-dash i{
@@ -124,7 +124,27 @@ ul{
 }
 
 .volumeTransc{
-    font-size: 0.8rem !important;
+    font-size: 0.78rem !important;
+}
+
+.chart-view-select{
+    padding-left: 2vw;
+    padding-bottom: 0.5vh !important;
+    margin-bottom: 1vh;
+}
+
+.chart-buttons{
+    font-size: 0.6rem;
+}
+
+.chart-buttons:hover{
+    background-color: #047dd4;
+    color: white;
+}
+
+.chart-button-active{
+    background-color: #047dd4;
+    color: white;
 }
 
 
@@ -322,6 +342,10 @@ ul{
         padding: 8vh;
     }
 
+    .chart-view-select{
+        padding-left: 55vw;
+    }
+
 
 }
 
@@ -400,6 +424,10 @@ ul{
 
     .ads{
         padding: 8vh;
+    }
+
+    .chart-view-select{
+        padding-left: 55vw;
     }
 
 }

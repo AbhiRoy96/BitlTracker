@@ -13,7 +13,7 @@ export class LivedataService {
 
   constructor(private http: HttpClient) { }
   private _url = 'https://blockchain.info/ticker';
-  private marketPriceURL = 'https://min-api.cryptocompare.com/data/histominute?fsym=BTC&tsym=USD&limit=60';
+  private marketPriceURL = 'https://min-api.cryptocompare.com/data/histominute?fsym=BTC&tsym=USD&limit=';
   private _btcPriceDataURL = 'https://min-api.cryptocompare.com/data/pricemultifull?fsyms=BTC,ETH,XRP,BCH,EOS,XLM,LTC,ADA&tsyms=USD';
   private _coinDetailsURL = 'https://min-api.cryptocompare.com/data/all/coinlist';
   private _topCoins = 'https://min-api.cryptocompare.com/data/top/totalvol?limit=50&tsym=USD';
@@ -24,8 +24,8 @@ export class LivedataService {
     return this.http.get<MarketData>(this._url);
   }
 
-  dailyMarketdata() {
-    return this.http.get(this.marketPriceURL)
+  dailyMarketdata(points) {
+    return this.http.get(this.marketPriceURL + points)
       .map(result => result);
   }
 
