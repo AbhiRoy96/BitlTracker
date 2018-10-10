@@ -1,29 +1,31 @@
-<div class="card-props">
-  
-  <div class="card text-center">
-    <div class="card-body">
-      <h1 class="card-title display-5">Sign In</h1>
-      <div class="card-text">
+<div class="body-background">
+  <div class="card-props">
+    
+    <div class="card text-center">
+      <div class="card-body">
+        <h1 class="card-title display-5">Sign In</h1>
+        <div class="card-text">
 
-        <div class="input-group mb-3">
-          <div class="input-group-prepend">
-            <span class="input-group-text" id="basic-addon1"><i class="fas fa-envelope"></i></span>
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="user"><i class="fas fa-envelope"></i></span>
+            </div>
+            <input id="user-field" type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1" (focus)="focusUser()" (focusout)="focusOutUser()">
           </div>
-          <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
-        </div>
 
-        <div class="input-group mb-3">
-          <div class="input-group-prepend">
-            <span class="input-group-text" id="basic-addon2"><i class="fas fa-lock"></i></span>
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="password"><i class="fas fa-lock"></i></span>
+            </div>
+            <input id="password-field" type="password" class="form-control" placeholder="Password" aria-label="Password" aria-describedby="basic-addon2" (focus)="focusPassword()" (focusout)="focusOutPassword()">
           </div>
-          <input type="password" class="form-control" placeholder="Password" aria-label="Password" aria-describedby="basic-addon2">
-        </div>
-        
-        
+          
+          
 
+        </div>
+        <a href="#" class="btn btn-primary">Login</a>
       </div>
-      <a href="#" class="btn btn-primary">Login</a>
     </div>
-  </div>
 
+  </div>
 </div>

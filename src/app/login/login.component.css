@@ -1,9 +1,17 @@
 /* Extra small devices (portrait phones, less than 576px)
 /* Small devices (landscape phones, 576px and up) */
+.body-background {
+    width: 100% !important;
+    height: 90vh !important;
+    background-color: #374765;
+    margin: 0 !important;
+    padding-top: 20vh;
+}
+
 @media (min-width: 320px) { 
     .card-props{
         background-color: #f7f7f9;
-        margin: 20vh 10vw 10vh 10vw;
+        margin: 0vh 10vw 10vh 10vw;
     }
     
     .card-props .card{
@@ -16,7 +24,7 @@
 @media (min-width: 576px) { 
     .card-props{
         background-color: #f7f7f9;
-        margin: 20vh 20vw 10vh 20vw;
+        margin: 00vh 20vw 10vh 20vw;
     }
     
     .card-props .card{
@@ -31,7 +39,7 @@
 @media (min-width: 768px) { 
     .card-props{
         background-color: #f7f7f9;
-        margin: 20vh 20vw 10vh 20vw;
+        margin: 00vh 20vw 10vh 20vw;
     }
     
     .card-props .card{
@@ -44,7 +52,7 @@
 @media (min-width: 992px) { 
     .card-props{
         background-color: #f7f7f9;
-        margin: 20vh 20vw 10vh 20vw;
+        margin: 0vh 20vw 10vh 20vw;
     }
     
     .card-props .card{
@@ -60,7 +68,7 @@
 @media (min-width: 1200px) {
     .card-props{
         background-color: #f7f7f9;
-        margin: 20vh 30vw 10vh 30vw;
+        margin: 00vh 30vw 10vh 30vw;
     }
     
     .card-props .card{
@@ -68,6 +76,8 @@
         box-shadow: 0.0rem 0.0rem 0.6rem #b1b1b1;
     }
 }
+
+
 
 .card-props .card-text{
     margin-top: 6vh;
@@ -95,13 +105,7 @@
     border-radius: 0px;
 }
 
-.card-props .input-group-text:focus{
+.show-border{
     border-color: #374765 !important;
-    /* border-color: #374765 */
+    transition: 50ms linear;
 }
-
-.card-props .form-control:focus{
-    border-color: #374765 !important;
-    /* border-color: #374765 */
-}
-

@@ -1,0 +1,280 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto+Slab:100,300,400,700');
+
+.qoutes{
+    font-family: 'Roboto Slab', serif;
+}
+
+
+.jumbotron{
+    margin: 0 !important;
+    padding: 4.5rem 1.8rem !important;
+    /* background-color: #22272c; */
+    background: url("../../assets/qoute_back.jpg");
+    background-repeat: no-repeat; 
+    background-size: cover;
+    border-radius: 0rem;
+
+}
+
+.lead{
+    margin-top: 2vh;
+    margin-bottom: 1vh;
+    font-size: 1.15rem;
+    color:aliceblue;
+}
+
+.display-4{
+    font-weight: 700;
+    color: #007bff;
+    width: 48%;
+    margin: 0 !important;
+}
+
+
+.typewriter{
+    overflow: hidden; /* Ensures the content is not revealed until the animation */
+    border-right: .15em solid #007bff; /* The typwriter cursor */
+    white-space: nowrap; /* Keeps the content on a single line */
+    margin: 0 auto; /* Gives that scrolling effect as the typing happens */
+    letter-spacing: .05em; /* Adjust as needed */
+    animation: 
+      typing 4.5s steps(40, end),
+      blink-caret .75s infinite;
+}
+  
+/* The typing effect */
+@keyframes typing {
+    from { width: 0 }
+    to { width: 48% }
+}
+  
+/* The typewriter cursor effect */
+@keyframes blink-caret {
+    from, to { border-color: transparent }
+    10% { border-color: #007bff; }
+}
+
+.row{
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+.left-pane {
+    background-color: #007bff;
+    color: white;
+    padding: 2% 2vw;
+    /* height: 66vh; */
+}
+.right-pane{
+    background-color: white;
+    color: #007bff;
+    padding: 0px !important;
+}
+.availableCarriers{
+    padding: 4% 2vw;
+    background-color: #0d519b;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    z-index: 1 !important;
+    color: white;
+    margin: 0;
+}
+.left-pane h3{
+    font-weight: 300 !important;
+}
+.right-pane h3{
+    font-size: 2.0rem;
+    font-weight: 700 !important;
+}
+.col-selectors{
+    margin-bottom: 2vh
+}
+.btn-q{
+    margin-top: 4vh !important;
+    margin-right: 1vw;
+    padding: 2vh 4vh;
+    border-radius: 0;
+    box-shadow: 0 5px 10px 0 rgba(0,0,0,0.2);
+}
+.card-xcv{
+    border-radius: 0;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    margin-bottom: 2vh;
+}
+.container-full-latch{
+    padding: 3% 2vw;
+    height: 75vh;
+    overflow-y: auto;
+    color:#252525;
+}
+.container-card-data{
+    overflow-y: auto;
+}
+.card-img-cont{
+    overflow: auto;
+    padding-top: 3%;
+}
+.cont_id{
+    width: inherit;
+}
+.quoteCard{
+    padding: 1.6rem 1.25rem !important;
+}
+.card-title{
+    color:#0d519b;
+    font-weight: 700;
+}
+.card-price{
+    font-size: 2.5rem;
+    font-weight: 700;
+    color:#0d519b;
+}
+.detls{
+    font-size: 0.9rem;
+    margin: 0;
+}
+.costBreakup{
+    font-size: 0.9rem;
+    padding: 2vh 1vw;
+}
+.accord-title{
+    font-size: 1.1rem;
+}
+.accord-title-price{
+    font-size: 1.1rem;
+    text-align: right;
+}
+.cont_comp{
+    padding-top: 2% !important; 
+    width: auto;
+    padding: 0vh 15%;
+}
+
+.exportPort-accordion{
+    cursor: pointer;
+    margin-top: 4vh;
+}
+
+.sub-price{
+    text-align: right;
+}
+
+.card-padding-xcv{
+    padding-top: 2rem !important;
+    padding-bottom: 2rem !important; 
+}
+
+
+.but-pane {
+    padding-top: 4vh;
+}
+
+
+#shipicon{
+    width: 20px;
+    height: 100%;
+    vertical-align: middle;
+}
+
+.thumb-icons{
+    /* padding: 0 !important; */
+    margin: 0 !important;
+    /* max-width: 3.5% !important; */
+}
+
+
+
+/* The Modal (background) */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    -webkit-animation-name: fadeIn; /* Fade in the background */
+    -webkit-animation-duration: 0.4s;
+    animation-name: fadeIn;
+    animation-duration: 0.4s
+}
+
+.modal-header{
+    border: 0 !important;
+    border-radius: 0 !important;
+}
+
+.modal-header h2 {
+    padding-top: 2vh;
+    font-weight: 700;
+    text-align: left !important;
+}
+
+/* Modal Content */
+.modal-content {
+    position: fixed;
+    bottom: 0;
+    background-color: #fefefe;
+    width: 100%;
+    -webkit-animation-name: slideIn;
+    -webkit-animation-duration: 0.4s;
+    animation-name: slideIn;
+    animation-duration: 0.4s
+}
+
+/* The Close Button */
+.close {
+    color: white;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.modal-header {
+    padding: 2px 16px;
+    background-color: #f44336;
+    color: white;
+}
+
+.modal-body {
+    padding: 1vh 16px;
+    font-weight: 500;
+    font-size: 1.25rem;
+    background-color: #ff9891;
+}
+
+.modal-footer {
+    padding: 2px 16px;
+    background-color: #5cb85c;
+    color: white;
+}
+
+/* Add Animation */
+@-webkit-keyframes slideIn {
+    from {bottom: -300px; opacity: 0} 
+    to {bottom: 0; opacity: 1}
+}
+
+@keyframes slideIn {
+    from {bottom: -300px; opacity: 0}
+    to {bottom: 0; opacity: 1}
+}
+
+@-webkit-keyframes fadeIn {
+    from {opacity: 0} 
+    to {opacity: 1}
+}
+
+@keyframes fadeIn {
+    from {opacity: 0} 
+    to {opacity: 1}
+}
