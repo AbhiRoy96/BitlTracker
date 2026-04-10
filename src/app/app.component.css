@@ -1,179 +1,92 @@
-/* Extra small devices (portrait phones, less than 576px)
-/* Small devices (landscape phones, 576px and up) */
-@media (min-width: 320px) { 
-    .navbar{
-        padding: 0 !important;
-        margin: 0 !important;
-    }
-    
-    .navbar-brand{
-        font-size: 1.5rem;
-        font-weight: 700;
-        color: white;
-        margin: 1vh 0vw 1vh 5vw;
-    }
+nav{
+    font-family: 'Roboto Slab', serif;
+    background-color: #001829 !important;
+    opacity: 0.86 !important;
 
-    .navbar-brand:hover, .navbar-brand:focus, .navbar-brand:active{
-        text-decoration: none;
-    }
-    
-    .nav-item:hover, .nav-item:focus{
-        background-color: #131414;
-        color: white;
-    }
-
-    .navbar-toggler{
-        margin: 1vh 2vw !important;
-        border: 0;
-        outline: 0;
-    }
-
-    .nav-link{
-        margin-left: 8vw;
-        color: white;
-    }
 }
 
-/* Small devices (landscape phones, 576px and up) */
-@media (min-width: 576px) { 
-    .navbar{
-        padding: 0 !important;
-        margin: 0 !important;
-    }
-    
-    .navbar-brand{
-        font-size: 1.5rem;
-        font-weight: 700;
-        color: white;
-        margin: 1vh 0vw 1vh 5vw;
-    }
-
-    .navbar-brand:hover, .navbar-brand:focus, .navbar-brand:active{
-        text-decoration: none;
-    }
-    
-    .nav-item:hover, .nav-item:focus{
-        background-color: #131414;
-        color: white;
-    }
-
-    .navbar-toggler{
-        margin: 1vh 2vw !important;
-        border: 0;
-        outline: 0;
-    }
-
-    .nav-link{
-        margin-left: 8vw;
-        color: white;
-    }
+.nav-brand-icon-d{
+    margin-top: 0.8vh;
+    width: 36px;
+    height: 40px;
 }
 
-
-
-/* Medium devices (tablets, 768px and up) */
-@media (min-width: 768px) { 
-    .navbar{
-        padding: 0 !important;
-        margin: 0 !important;
-    }
-    
-    .navbar-brand{
-        font-size: 1.3rem;
-        font-weight: 400;
-        color: white;
-        margin: 1vh 0vw 1vh 5vw;
-    }
-
-    .navbar-brand:hover, .navbar-brand:focus, .navbar-brand:active{
-        text-decoration: none;
-    }
-    
-    .nav-item:hover, .nav-item:focus{
-        background-color: #131414;
-        color: white;
-    }
-
-    .navbar-toggler{
-        margin: 1vh 2vw !important;
-        border: 0;
-        outline: 0;
-    }
-
-    .nav-link{
-        margin-left: 8vw;
-        color: white;
-    }
+.navbar-brand{
+    margin-right: 40vw;
+    margin-left: 2vw;
+    color: #007bff;
+    font-weight: 700;
+    font-size: 2rem;
+    letter-spacing: 0.1rem;
 }
 
-/* Large devices (desktops, 992px and up) */
-@media (min-width: 992px) { 
-    .navbar{
-        padding: 0 !important;
-        margin: 0 !important;
-    }
-    
-    .navbar-brand{
-        font-size: 1.7rem;
-        font-weight: 700;
-        color: white;
-        margin: 2vh 0vw 2vh 6vw;
-    }
-
-    .navbar-brand:hover, .navbar-brand:focus, .navbar-brand:active{
-        text-decoration: none;
-    }
-    
-    .nav-item:hover, .nav-item:focus{
-        background-color: transparent;
-        color: white;
-    }
-
-    .nav-link{
-        margin-left: 70vw;
-        font-size: 1.1rem;
-        color: white;
-    }
+.navbar-brand:focus{
+    color: #007bff;
 }
 
-
-
-
-/* Extra large devices (large desktops, 1200px and up) */
-@media (min-width: 1200px) {
-    .navbar{
-        padding: 0 !important;
-        margin: 0 !important;
-    }
-    
-    .navbar-brand{
-        font-size: 1.7rem;
-        font-weight: 700;
-        color: white;
-        margin: 2vh 0vw 2vh 6vw;
-    }
-
-    .navbar-brand:hover, .navbar-brand:focus, .navbar-brand:active{
-        text-decoration: none;
-    }
-    
-    .nav-item:hover, .nav-item:focus{
-        background-color: transparent;
-        color: white;
-    }
-
-    .nav-link{
-        margin-left: 72vw;
-        font-size: 1.1rem;
-        color: white;
-    }
-}
-
-.custom-dark, .bg-custom{
-    background-color: rgb(53, 88, 168);
+.navbar-brand:hover{
     color: white;
 }
 
+.navbar-toggler{
+    color: #007bff;
+    padding: 0;
+    margin-right: 2vw;
+}
 
+.tg-icon{
+    font-size: 1.85rem;
+}
 
+.nav-item{
+    margin-right: 1.5rem;
+}
 
+.nav-item:hover{
+    border-bottom: solid 0.2rem #007bff;
+    transition: linear 0.1s;
+}
+
+.nav-link{
+    color: white !important;
+}
+
+.active{
+    border-bottom: solid 0.2rem #2d92ff;
+}
+
+footer{
+    background-color: #062135;
+    font-family: 'Source Sans Pro', sans-serif;
+    padding-bottom: 5vh;
+}
+
+.footer-row{
+    padding-top: 6vh;
+}
+
+.typ-header{
+    color:#0B80DA
+}
+
+.typ-header-h1{
+    font-family: 'Roboto Slab', serif;
+    color:#0B80DA;
+    /* letter-spacing: 0.1rem; */
+}
+
+.sub-itm{
+    color: #78B7EC;
+    font-weight: 400;
+}
+
+.ti-follow{
+    margin-right:0.4rem;
+    background-color: #78B7EC;
+    color: #062135;
+    border-radius: 1.5rem;
+    width: 2.5rem;
+    min-width: 2.5rem;
+    height: 2.5rem;
+    box-shadow: 0 1px 1.5px 0 rgba(0,0,0,.12),0 1px 1px 0 rgba(0,0,0,.26);
+}

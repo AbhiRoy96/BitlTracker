@@ -2,10 +2,20 @@
 /* Small devices (landscape phones, 576px and up) */
 .body-background {
     width: 100% !important;
-    height: 90vh !important;
-    background-color: #374765;
+    height: 100vh !important;
+    background-color: #007bff;
     margin: 0 !important;
-    padding-top: 20vh;
+    padding-top: 25vh;
+}
+
+.nav-brand-icon-d{
+    margin-top: 0.8vh;
+    width: 36px;
+    height: 40px;
+}
+
+.btn-log{
+    background-color: #0d519b
 }
 
 @media (min-width: 320px) { 
@@ -16,7 +26,7 @@
     
     .card-props .card{
         border-radius: 0rem;
-        box-shadow: 0.0rem 0.0rem 0.6rem #b1b1b1;
+        box-shadow: 0 5px 10px 0 rgba(0,0,0,0.2);
     }
 }
 
@@ -29,7 +39,7 @@
     
     .card-props .card{
         border-radius: 0rem;
-        box-shadow: 0.0rem 0.0rem 0.6rem #b1b1b1;
+        box-shadow: 0 5px 10px 0 rgba(0,0,0,0.2);
     }
 }
 
@@ -44,7 +54,7 @@
     
     .card-props .card{
         border-radius: 0rem;
-        box-shadow: 0.0rem 0.0rem 0.6rem #b1b1b1;
+        box-shadow: 0 5px 10px 0 rgba(0,0,0,0.2);
     }
 }
 
@@ -57,7 +67,7 @@
     
     .card-props .card{
         border-radius: 0rem;
-        box-shadow: 0.0rem 0.0rem 0.6rem #b1b1b1;
+        box-shadow: 0 5px 10px 0 rgba(0,0,0,0.2);
     }
 }
 
@@ -73,7 +83,7 @@
     
     .card-props .card{
         border-radius: 0rem;
-        box-shadow: 0.0rem 0.0rem 0.6rem #b1b1b1;
+        box-shadow: 0 5px 10px 0 rgba(0,0,0,0.2);
     }
 }
 

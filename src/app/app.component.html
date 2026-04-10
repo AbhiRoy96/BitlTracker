@@ -1,18 +1,92 @@
-<nav class="navbar navbar-expand-lg sticky-top custom-dark bg-custom">
-  <a class="navbar-brand" href="#"><i class="fas fa-file-invoice-dollar"></i> Bit Tracker</a>
-  <button id="nav-button" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation" aria-expanded="false" aria-label="Our Menu">
-      <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="navbar-collapse collapse" id="navigation">
-      <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-          <li class="nav-item">
-              <a class="nav-link" href="#"><i class="fas fa-sign-in-alt"></i> Log In</a>
-          </li>
-      </ul>
-  </div>
-</nav>
+<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+    <a class="navbar-brand" href="#">
+        <img src="../assets/bitracker.png" class="d-inline-block align-top nav-brand-icon-d" alt="BitTracker-logo">
+        Bit Tracker
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+        <i class="fas fa-bars tg-icon"></i>
+    </button>
 
+    <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+        <ul class="navbar-nav mr-auto mt-2 mt-lg-0 align-rt">
+            <li class="nav-item">
+                <a class="nav-link" href="#">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">About Us</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Quotes</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" routerLink="/markets" routerLinkActive="active">Markets</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Pricing</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" routerLink="/signin" routerLinkActive="active">Sign In</a>
+            </li>
+        </ul>
+    </div>
+</nav>
 
 <!-- <app-data-dashboard></app-data-dashboard> -->
 <!-- <app-login></app-login> -->
-<app-quotes></app-quotes>
+<!-- <app-quotes></app-quotes> -->
+<router-outlet></router-outlet>
+
+
+
+
+<footer class="page-footer">
+    <div class="container">
+        <div class="row footer-row">
+            <div class="col-4">
+                <h3 class="typ-header"><b>Our Services</b></h3>
+                <h6 class="sub-itm">Supply Chain Design</h6>
+                <h6 class="sub-itm">Shipping and Cargo Services</h6>
+                <h6 class="sub-itm">Blockchain Market Api</h6>
+                <h6 class="sub-itm">Freight Forwarding Services</h6>
+            </div>
+            <div class="col-4">
+                <h3 class="typ-header"><b>Global Presence</b></h3>
+                <h6 class="sub-itm">Africas</h6>
+                <h6 class="sub-itm">Americas</h6>
+                <h6 class="sub-itm">Asia Pacific</h6>
+                <h6 class="sub-itm">Europe</h6>
+                <h6 class="sub-itm">Middle East</h6>
+            </div>
+            <div class="col-4">
+                <h3 class="typ-header"><b>About</b></h3>
+                <h6 class="sub-itm">Our History</h6>
+                <h6 class="sub-itm">Sustainability</h6>
+                <h6 class="sub-itm">Careers</h6>
+                <h6 class="sub-itm">Investment</h6>
+                <h6 class="sub-itm">Privacy and cookie policy</h6>
+            </div>
+        </div>
+        <br>
+        <div class="row footer-row">
+            <div class="col-4">
+                <h1 class="typ-header-h1"><b>Bit Tracker</b></h1>
+                <h6 class="sub-itm">© 2019. Bit Tracker & Co.</h6>
+            </div>
+            <div class="col-4">
+                <h3 class="typ-header"><b>News</b></h3>
+                <h6 class="sub-itm">News And Advisories</h6>
+                <h6 class="sub-itm">Press</h6>
+            </div>
+            <div class="col-4">
+                <h3 class="typ-header"><b>Connect with Us</b></h3>
+                <div>
+                    <button class="btn bmd-btn-fab ti-follow"><i class="fab fa-facebook-f"></i></button>
+                    <button class="btn bmd-btn-fab ti-follow"><i class="fab fa-twitter"></i></button>
+                    <button class="btn bmd-btn-fab ti-follow"><i class="fab fa-instagram"></i></button>
+                    <button class="btn bmd-btn-fab ti-follow"><i class="fab fa-linkedin-in"></i></button>
+                    <button class="btn bmd-btn-fab ti-follow"><i class="fab fa-youtube"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>

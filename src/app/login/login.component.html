@@ -1,16 +1,20 @@
 <div class="body-background">
   <div class="card-props">
-    
+
     <div class="card text-center">
       <div class="card-body">
-        <h1 class="card-title display-5">Sign In</h1>
+
+        <h1 class="card-title display-5">
+          <img src="../assets/bitracker.png" class="d-inline-block align-top nav-brand-icon-d" alt="BitTracker-logo">
+          Sign In
+        </h1>
         <div class="card-text">
 
           <div class="input-group mb-3">
             <div class="input-group-prepend">
               <span class="input-group-text" id="user"><i class="fas fa-envelope"></i></span>
             </div>
-            <input id="user-field" type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1" (focus)="focusUser()" (focusout)="focusOutUser()">
+            <input id="user-field" type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1" (focus)="focusUser()" (focusout)="focusOutUser()" (keyup)="getUSID($event)">
           </div>
 
           <div class="input-group mb-3">
@@ -19,11 +23,21 @@
             </div>
             <input id="password-field" type="password" class="form-control" placeholder="Password" aria-label="Password" aria-describedby="basic-addon2" (focus)="focusPassword()" (focusout)="focusOutPassword()">
           </div>
-          
-          
+
+
 
         </div>
-        <a href="#" class="btn btn-primary">Login</a>
+        <br>
+        <a class="btn btn-primary btn-log" (click)="loginUser()">Login</a>
+        <div class="row">
+          <div class="col-5">
+            <h6><a href="#">Need Assistance?</a></h6>
+          </div>
+          <div class="col-7">
+            <h6>Not yet registered? <a href="#">Register Now!</a></h6>
+          </div>
+        </div>
+        <br>
       </div>
     </div>
 

@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { Validators } from '@angular/forms';
+
+const EMAIL_REGEX = /^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
 
 @Component({
   selector: 'app-login',
@@ -7,7 +11,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoginComponent implements OnInit {
 
-  constructor() { }
+  constructor(private router: Router) { }
+  private userId: any;
 
   ngOnInit() {
   }
@@ -33,6 +38,17 @@ export class LoginComponent implements OnInit {
   focusOutPassword() {
     document.getElementById('password').classList.remove('show-border');
     document.getElementById('password-field').classList.remove('show-border');
+  }
+
+  getUSID(event) {
+    this.userId = event.target.value;
+  }
+
+  loginUser() {
+    if ((this.userId !== '') && (EMAIL_REGEX.test(this.userId) === true) && (this.userId != null)) {
+      window.localStorage.setItem('_euid', this.userId);
+      this.router.navigate(['transactions']);
+    }
   }
 
 }

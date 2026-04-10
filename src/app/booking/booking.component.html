@@ -1,0 +1,150 @@
+<div class="jumbotron1">
+  <h1 class="display-4 typewriter">Connecting global trade</h1>
+  <p class="lead">We have developed an unrivaled shipping expertise to offer you a range of services to connect you to key markets across the globe. </p>
+</div>
+
+<ng-container *ngIf="shipmentData; else elseTemplate">
+  <div class="container">
+    <br><br><br><br><br>
+
+
+    <div class="card container-card-data card-ui">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-5 card-img-cont">
+            <img class="cont_id" src="../assets/{{shipmentData.cont_id}}" alt={{shipmentData.cont_id}}>
+            <br><br>
+            <div class="logo-company">
+              <img class="cont_comp" src="../assets/{{shipmentData.cont_image}}" alt={{shipmentData.cont_image}}>
+            </div>
+
+          </div>
+          <div class="col-md-7">
+            <h3 class="card-title">{{shipmentData.freight_services_name}}</h3>
+            <h6 class="card-subtitle mb-2 text-muted">{{shipmentData.shpmt_name}} | {{shipmentData.freight_mode}} </h6>
+            <p class="card-text card-price">{{shipmentData.quote_price | currency:'USD'}}</p>
+            <h6 class="card-subtitle mb-2 text-muted">Origin Port: <b> {{shipmentData.from_port_name}} </b></h6>
+            <h6 class="card-subtitle mb-2 text-muted">Discharge Port: <b> {{shipmentData.to_port_name}} </b></h6>
+            <h6 class="card-subtitle mb-2 text-muted">Shipment Date: <b> {{shipmentData.date}} </b></h6>
+            <h6 class="card-subtitle mb-2 text-muted trb">Booking Fingerprint: <b>{{awb}}</b></h6>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+    <div class="card container-card-data card-ui">
+      <div class="card-body">
+        <h3 class="card-title">Customer Details</h3>
+        <h6 class="card-subtitle mb-2 text-muted">All details are mandatory beacuse we need to serve you better!</h6>
+
+        <!-- form starts here -->
+        <br>
+          <div class="row">
+            <div class=" col-md-6">
+              <label for="first_name">First Name</label>
+              <input type="text"  id="first_name" class="form-control" placeholder="First Name" (keyup)="getFName($event)" required>
+            </div>
+
+            <div class=" col-md-6">
+              <label for="last_name">Last Name</label>
+              <input type="text"  id="last_name" class="form-control" placeholder="Last Name" (keyup)="getLName($event)" required>
+            </div>
+          </div>
+          <br>
+          <div class="row">
+            <div class=" col-md-6">
+              <label for="contact_tel">Telephone Number</label>
+              <input type="text"  id="contact_tel"class="form-control" pattern="^\d{10}$"
+                placeholder="Please add the Country Code before the number..." (keyup)="getTele($event)" required>
+            </div>
+
+            <div class=" col-md-6">
+              <label for="c_email">E-mail</label>
+              <input type="email"  id="c_email" class="form-control" placeholder="someone@something.com" (keyup)="getMail($event)" required>
+            </div>
+          </div>
+          <br>
+          <div class="row">
+
+            <div class=" col-md-6">
+              <label for="remarks">Address</label>
+              <textarea  id="address" class="form-control"
+                placeholder="One Microsoft Way, Redmond, WA 98052, USA" (keyup)="getAddr($event)" required></textarea>
+
+            </div>
+          </div>
+
+        <!-- form ends here -->
+      </div>
+    </div>
+
+
+
+
+
+    <div class="card container-card-data card-ui">
+      <div class="card-body">
+        <p class="card-text card-price">Payment Due: {{shipmentData.quote_price | currency:'USD'}}</p>
+        <h6 class="card-subtitle mb-2 text-muted trb">Merchant Address:
+          <b>{{merchantAddress}}</b></h6>
+        <h6 class="card-subtitle mb-2 text-muted">Payment will be made at this address. </h6>
+
+        <br><br>
+
+        <!-- form starts here -->
+
+          <div class="row">
+            <div class=" col-md-6">
+              <label for="e_pass">Ethereum Wallet Account Number</label>
+              <input type="text"  id="e_pass" class="form-control" placeholder="Account UUID" (keyup)="getUUID($event)" required>
+            </div>
+            <div class=" col-md-6">
+              <br>
+              <button id="patyi" type="submit" class="btn btn-lg btn-primary btn-wel form-control" (click)="createNewBooking()">Pay</button>
+            </div>
+          </div>
+
+
+        <!-- form ends here -->
+      </div>
+    </div>
+
+
+    <br><br>
+  </div>
+</ng-container>
+
+<ng-template #elseTemplate>
+  <div class="container-fluid nist">
+    <div class="jumbotron error">
+      <br><br>
+      <h1 class="display-3"> ;( Well this is quite embarrasing! </h1>
+      <p> Seems like you have visited a broken link or expired link! </p>
+      <br><br><br>
+      <p class="lead">
+        <a class="btn btn-primary btn-lg" routerLink="/" routerLinkActive="active" role="button">Take me to Home!</a>
+      </p>
+      <br>
+    </div>
+  </div>
+
+</ng-template>
+
+
+<!-- Modal -->
+<div id="error-b" class="modal-alert">
+
+  <!-- Modal content -->
+  <div class="modal-content-alert">
+    <div class="modal-header-alert">
+      <h2>Oh! There are Errors!</h2>
+      <span class="close" (click)="exitModal()">&times;</span>
+    </div>
+    <div class="modal-header-alert">
+      <p>You need to fill all details.</p>
+    </div>
+  </div>
+
+</div>

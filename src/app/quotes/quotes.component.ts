@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { QuoteServiceService } from '../quote-service.service';
+import { CoordData, BookingTempData } from '../marketData';
+
 
 @Component({
   selector: 'app-quotes',
@@ -12,13 +15,31 @@ import { QuoteServiceService } from '../quote-service.service';
 export class QuotesComponent implements OnInit {
 
 
-  constructor(private quoteSer: QuoteServiceService) { }
+  constructor(private quoteSer: QuoteServiceService, private router: Router) { }
 
+  // private base_latitude = 22.5726;
+  // private base_longitude = 88.3639;
+
+  private base_latitude = 20.0;
+  private base_longitude = 0.0;
+
+  private f_lat: any;
+  private f_long: any;
+
+  private t_lat: any;
+  private t_long: any;
+
+  private coordinateData: any;
+
+
+
+  private shipContType: any;
   private sess_data: any;
   private containerData: any;
   private countryList: any;
   private d_ports: any;
   private a_ports: any;
+  private shipmentDate: any;
   private portDeparture: number;
   private portArrival: number;
   private shpType: any = [
@@ -77,9 +98,12 @@ export class QuotesComponent implements OnInit {
   private containerType: any;
   private grossWt: any;
   private alert_text: any;
+  private reeferTrue: any;
+  private bookingDat: any;
 
 
   ngOnInit() {
+    window.localStorage.setItem('isPyDs', 'false');
     this.quoteSer.authenticateSession()
       .subscribe(data => {
         this.sess_data = data;
@@ -88,11 +112,12 @@ export class QuotesComponent implements OnInit {
         this.quoteSer.getCountryList(window.localStorage.getItem('_ui'))
           .subscribe( cdata => {
             this.countryList = cdata;
+            this.containerData = {'status': 201};
           });
 
       });
     document.getElementById('grssWT').style.display = 'none';
-
+    this.reeferTrue = null;
   }
 
   giveFCLQuotes(fromPort, toPort, type) {
@@ -100,6 +125,9 @@ export class QuotesComponent implements OnInit {
       .subscribe(data => {
         this.containerData = data;
           console.log(this.containerData);
+          this.shipContType = 'FCL';
+          this.f_setMarkers(fromPort);
+          this.t_setMarkers(toPort);
       });
   }
 
@@ -108,6 +136,9 @@ export class QuotesComponent implements OnInit {
       .subscribe(data => {
         this.containerData = data;
           console.log(this.containerData);
+          this.shipContType = 'LCL';
+          this.f_setMarkers(fromPort);
+          this.t_setMarkers(toPort);
       });
   }
 
@@ -116,6 +147,9 @@ export class QuotesComponent implements OnInit {
       .subscribe(data => {
         this.containerData = data;
           console.log(this.containerData);
+          this.shipContType = 'BULK';
+          this.f_setMarkers(fromPort);
+          this.t_setMarkers(toPort);
       });
   }
 
@@ -150,14 +184,40 @@ export class QuotesComponent implements OnInit {
 
   }
 
+  f_setMarkers(portNo) {
+
+    this.quoteSer.getPortData(window.localStorage.getItem('_ui'), portNo)
+      .subscribe( data => {
+        this.coordinateData = data;
+        this.f_lat = this.coordinateData[0].latitude;
+        this.f_long = this.coordinateData[0].longitude;
+      });
+  }
+
+
+  t_setMarkers(portNo) {
+
+    this.quoteSer.getPortData(window.localStorage.getItem('_ui'), portNo)
+      .subscribe( data => {
+        this.coordinateData = data;
+        this.t_lat = this.coordinateData[0].latitude;
+        this.t_long = this.coordinateData[0].longitude;
+      });
+  }
+
   getContainerTypes_a(event) {
     this.containerType = event.target.value;
-
+    this.grossWt = 1;
     if ((this.containerType === 'HNDSZ') || (this.containerType === 'HNDMX') || (this.containerType === 'SUPRMX') ||
     (this.containerType === 'ULTRMX') || (this.containerType === 'PNMX') || (this.containerType === 'CPSZ')) {
       document.getElementById('grssWT').style.display = 'block';
     } else {
-      document.getElementById('grssWT').style.display = 'none';
+      if ((this.containerType === '20REF') || (this.containerType === '40REF')) {
+        document.getElementById('grssWT').style.display = 'none';
+      } else {
+        document.getElementById('grssWT').style.display = 'none';
+      }
+
     }
   }
 
@@ -165,26 +225,47 @@ export class QuotesComponent implements OnInit {
     this.grossWt = event.target.value;
   }
 
+
+  getShipmentDate(event) {
+    this.shipmentDate = event.target.value;
+  }
+
+
   getQuote() {
 
-    console.log(this.portDeparture);
+    this.f_lat = null;
+    this.f_long = null;
+    this.t_lat = null;
+    this.t_long = null;
+
     if ((this.portDeparture != null) && (this.portArrival != null)) {
       if ((this.containerType === '20ST') || (this.containerType === '40ST') || (this.containerType === '40HQ') ||
       (this.containerType === '20REF') || (this.containerType === '40REF')) {
+
+        if ((this.containerType === '20REF') || (this.containerType === '40REF')) {
+          this.reeferTrue = 'reefer';
+        } else {
+          this.reeferTrue = null;
+        }
+
         this.giveFCLQuotes(this.portDeparture, this.portArrival, this.containerType);
       } else if ((this.containerType === 'IBOX5') || (this.containerType === 'IBOX7')) {
+        this.reeferTrue = null;
+
         this.giveLCLQuotes(this.portDeparture, this.portArrival, this.containerType);
       } else if ((this.containerType === 'HNDSZ') || (this.containerType === 'HNDMX') || (this.containerType === 'SUPRMX') ||
       (this.containerType === 'ULTRMX') || (this.containerType === 'PNMX') || (this.containerType === 'CPSZ')) {
         if (this.grossWt != null) {
+          this.reeferTrue = null;
+
           this.giveBULKQuotes(this.portDeparture, this.portArrival, this.containerType, this.grossWt);
         } else {
           this.alert_text = 'Please enter the Gross Weight.';
-          document.getElementById('myModal').style.display = 'block';
+          document.getElementById('alertModal').style.display = 'block';
         }
       } else {
         this.alert_text = 'Please select the Container Type.';
-        document.getElementById('myModal').style.display = 'block';
+        document.getElementById('alertModal').style.display = 'block';
       }
     } else {
       if (this.portDeparture == null) {
@@ -192,22 +273,49 @@ export class QuotesComponent implements OnInit {
       } else {
         this.alert_text = 'Please select the Port of Discharge.';
       }
-      document.getElementById('myModal').style.display = 'block';
+      document.getElementById('alertModal').style.display = 'block';
     }
 
   }
 
   exitModal() {
-    document.getElementById('myModal').style.display = 'none';
+    document.getElementById('alertModal').style.display = 'none';
   }
 
 
 
+  getBooking(carrier, from_name, to_name, carrier_name,  quote_price, cont_id, cont_image, shpmt_name) {
+
+    // tslint:disable-next-line:max-line-length
+    const booking = new BookingTempData(this.portDeparture, this.portArrival, this.shipContType, this.containerType, this.shipmentDate, quote_price, carrier, from_name, to_name, carrier_name, cont_id, cont_image, shpmt_name, this.grossWt);
+    // console.log(booking);
+
+    this.quoteSer.getTempBooking(window.localStorage.getItem('_ui'), booking)
+      .subscribe(data => {
+        this.bookingDat = data;
+        // console.log(this.bookingDat);
+      });
+  }
 
 
 
+  proceedToBook(bookingDat) {
+    console.log(bookingDat);
+    window.localStorage.setItem('_bt', bookingDat.booking_session);
+    window.localStorage.setItem('_bid', bookingDat.booking_id);
+    // for quick redressal
+    this.router.navigate(['booking']);
 
+    // document.getElementById('confirmBooking').style.display = 'none';
 
+    // gg if no sign in.
+    // if (!window.localStorage.getItem('_ur')) {
+    //   this.alert_text = 'Please Sign In to continue with booking.';
+    //   document.getElementById('alertModal').style.display = 'block';
+    // } else {
+    //   console.log('gg');
+    // }
+  }
 
 }
 

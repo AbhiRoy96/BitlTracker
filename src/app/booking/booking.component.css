@@ -1,0 +1,200 @@
+.jumbotron1{
+  margin: 0 !important;
+  padding: 4.5rem 1.8rem !important;
+  padding-top: 13rem !important;
+  /* background-color: #22272c; */
+  background: url("../../assets/booking.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  border-radius: 0rem;
+
+}
+
+.lead{
+  margin-top: 2vh;
+  margin-bottom: 1vh;
+  font-size: 1.50rem;
+  color:#e8f3ff;
+}
+
+.display-4{
+  font-weight: 700;
+  color: #0980ff;
+  width: 48%;
+  margin: 0 !important;
+}
+
+
+.nist{
+  padding: 0;
+}
+
+.jumbotron{
+  margin: 0;
+}
+
+.error{
+  background: #101115; /* For browsers that do not support gradients */
+  background: -webkit-linear-gradient(left top, #101115, #101823); /* For Safari 5.1 to 6.0 */
+  background: -o-linear-gradient(bottom right, #101115, #101823); /* For Opera 11.1 to 12.0 */
+  background: -moz-linear-gradient(bottom right, #101115, #101823); /* For Firefox 3.6 to 15 */
+  background: linear-gradient(to bottom right, #101115, #101823); /* Standard syntax */
+
+  text-align: center;
+  color: #0175f1;
+  border-radius: 0;
+}
+
+.btn-lg{
+  border-radius: 0;
+}
+
+.cont_id{
+  width: inherit !important;
+}
+
+.logo-company{
+  text-align: center;
+}
+
+.card-ui{
+  border-radius: 0;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.4);
+  margin-bottom: 4vh;
+}
+
+.card-xcv{
+  border-radius: 0;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  margin-bottom: 2vh;
+}
+
+.card-img-cont{
+  overflow: auto;
+}
+
+.card-title{
+  color:#0d519b;
+  font-weight: 700;
+}
+
+.card-price{
+  font-size: 2.5rem;
+  font-weight: 700;
+  color:#0d519b;
+}
+
+.trb{
+  color:#0d519b !important;
+}
+
+.btn-wel{
+  border-radius:0;
+  background-color:#0d519b !important;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.4);
+  margin-bottom: 2vh;
+}
+
+.btn-wel:focus{
+  color: white;
+}
+
+
+/* The Modal (background) */
+.modal-alert {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  -webkit-animation-name: fadeIn; /* Fade in the background */
+  -webkit-animation-duration: 0.4s;
+  animation-name: fadeIn;
+  animation-duration: 0.4s
+}
+
+.modal-header-alert{
+  border: 0 !important;
+  border-radius: 0 !important;
+}
+
+.modal-header-alert h2 {
+  padding-top: 2vh;
+  font-weight: 700;
+  text-align: left !important;
+}
+
+/* Modal Content */
+.modal-content-alert {
+  position: fixed;
+  bottom: 0;
+  background-color: #fefefe;
+  width: 100%;
+  -webkit-animation-name: slideIn;
+  -webkit-animation-duration: 0.4s;
+  animation-name: slideIn;
+  animation-duration: 0.4s
+}
+
+/* The Close Button */
+.close {
+  color: white;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.modal-header-alert {
+  padding: 2px 16px;
+  background-color: #f44336;
+  color: white;
+}
+
+.modal-body-alert {
+  padding: 1vh 16px;
+  font-weight: 500;
+  font-size: 1.25rem;
+  background-color: #ff9891;
+}
+
+.modal-footer-alert {
+  padding: 2px 16px;
+  background-color: #5cb85c;
+  color: white;
+}
+
+/* Add Animation */
+@-webkit-keyframes slideIn {
+  from {bottom: -300px; opacity: 0}
+  to {bottom: 0; opacity: 1}
+}
+
+@keyframes slideIn {
+  from {bottom: -300px; opacity: 0}
+  to {bottom: 0; opacity: 1}
+}
+
+@-webkit-keyframes fadeIn {
+  from {opacity: 0}
+  to {opacity: 1}
+}
+
+@keyframes fadeIn {
+  from {opacity: 0}
+  to {opacity: 1}
+}
+
+
+

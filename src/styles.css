@@ -1,19 +1,22 @@
 /* Global styles to this app*/
-@import url('https://fonts.googleapis.com/css?family=Montserrat:100,200,300,400,500,600,700,900');
+@import url('https://fonts.googleapis.com/css?family=Noto+Sans:400,700');
+@import url('https://fonts.googleapis.com/css?family=Roboto+Slab:100,300,400,700');
+@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700');
+
 
 body{
-    font-family: 'Montserrat', sans-serif;
+  font-family: 'Noto Sans', sans-serif;
 }
 
 a{
     outline: 0;
 }
 
-textarea:hover, 
-input:hover, 
-textarea:active, 
-input:active, 
-textarea:focus, 
+textarea:hover,
+input:hover,
+textarea:active,
+input:active,
+textarea:focus,
 input:focus,
 button:focus,
 button:active,

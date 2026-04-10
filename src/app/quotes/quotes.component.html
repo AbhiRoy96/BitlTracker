@@ -5,8 +5,7 @@
     <p class="lead">We have developed an unrivaled shipping expertise to offer you a range of services to connect you to key markets across the globe. </p>
   </div>
 
-  <!-- Maps -->
-  <div id="map"></div>
+
 
 
 
@@ -16,6 +15,15 @@
     <div class="col-md-6 left-pane">
         <h3>Find Quotes From One Port To Another</h3>
         <br>
+        <div class="map">
+            <agm-map [latitude]="base_latitude" [longitude]="base_longitude" [zoom]="1.2">
+                <agm-marker *ngIf="f_lat" [latitude]="f_lat" [longitude]="f_long"></agm-marker>
+                <agm-marker *ngIf="t_lat" [latitude]="t_lat" [longitude]="t_long"></agm-marker>
+            </agm-map>
+        </div>
+
+
+        <br><br>
         <h5>Port of Origin</h5>
         <div class="row">
             <div class="col-md-6 col-selectors">
@@ -65,11 +73,11 @@
             </div>
             <div class="col-md-6 col-selectors">
                 <label for="departure_dt">Date of Dispatch</label>
-                <input type="date" class="form-control" id="departure_dt">
+                <input type="date" class="form-control" id="departure_dt" (change)="getShipmentDate($event)">
             </div>
         </div>
 
-        
+
         <div class="row">
             <div class="col-md-6 col-selectors">
                 <div id="grssWT">
@@ -88,144 +96,169 @@
         <div class="availableCarriers">
             <h3>Available Carrier Offers</h3>
         </div>
-        
-        
-        
-        
+
+
+
+
         <div class="container-full-latch" *ngIf="containerData">
 
-            <!-- <div class="Row" *ngFor="let exchange_data of marketExchanges.Data.Exchanges">  ../../assets/-->
-            <!-- container offers 5 -->
-            <div class="card container-card-data card-xcv" *ngFor="let carrier_data of containerData.quotes">
-                    <div class="card-body card-padding-xcv">
-                        <div class="row">
-                            <div class="col-md-5 card-img-cont">
-                                <img class="cont_id" src="../../assets/{{carrier_data.liner_image_id}}" alt={{carrier_data.liner_image_id}}>
-                                <br><br>
-                                <img class="cont_comp" src="../../assets/{{carrier_data.liner_image}}" alt={{carrier_data.liner_image}}>
-                            </div>
-                            <div class="col-md-7">
-                                <h5 class="card-title">{{carrier_data.liner_name}}</h5>
-                                <h6 class="card-subtitle mb-2 text-muted">{{containerData.container_type}} | Liner Terms: {{carrier_data.liner_terms}}</h6>
-                                <p class="card-text card-price">{{carrier_data.total_quote_price | currency:'USD'}}</p>
-                                <a href="#" class="btn btn-primary">Book Now</a>
-                                <a id="show_details{{carrier_data.liner_id}}" class="btn btn-light" data-toggle="collapse" href="#more_details{{carrier_data.liner_id}}" role="button" aria-expanded="false" aria-controls="more_details" (click)="changeDetails($event)">View Details</a>
-                            </div>
-                        </div>
-                        <!-- End of Shipping card -->
+            <ng-container *ngIf=" containerData.status === 200; then success; else error"></ng-container>
 
-                        <!-- breakup of charges -->
-                        <!-- breakup of charges -->
-                        <div class="collapse multi-collapse" id="more_details{{carrier_data.liner_id}}">
-                                    
-                            <!-- accordion starts here -->
-                            <div class="accordion exportPort-accordion" id="exportPort{{carrier_data.liner_id}}">
-
-                                <!-- port of origin -->
-                                <div class="card">
-                                    <div class="card-header" id="originPortData{{carrier_data.liner_id}}">
-                                    <h5 class="mb-0">
-                                        <a class="accord" data-toggle="collapse" attr.data-target="#collapseOne{{carrier_data.liner_id}}" aria-expanded="true" attr.aria-controls="collapseOne{{carrier_data.liner_id}}">
-                                            <div class="row card-title accord-title">
-                                                <div class="col-1 thumb-icons"><img id="shipicon" src="../../assets/container.svg" width="40px" height="40px" alt="shipIcon"></div>
-                                                <div class="col-8">
-                                                    {{containerData.from_port}} - Origin Port Handling Charges
-                                                    <h6 class="card-subtitle mb-2 text-muted detls">Transit Time: 2-4 days</h6>
-                                                </div>
-                                                <div class="col-3 accord-title-price">{{carrier_data.origin_chrgs | currency: 'USD'}}</div>
-                                            </div>
-                                        </a>
-                                    </h5>
+                <ng-template #error>
+                    <ng-container *ngIf=" containerData.status === 201; then loading; else error1"></ng-container>
+                        <ng-template #loading>
+                            <div class="card mb-3 rbc card-xcv">
+                                <img class="card-img-top inm-card" src="../../assets/containerLoad.svg" alt="loading">
+                                <div class="card-body">
+                                    <h3 class="card-title">Please Select Origin-Discharge Port</h3>
+                                    <p class="card-text"><small class="text-muted">Get lower shipping rates by shipping everything in one container / ship’s hold.</small></p>
                                 </div>
+                            </div>
+                        </ng-template>
 
-                                <!-- accordion header1 ends -->
-                                
-                                <div id="collapseOne{{carrier_data.liner_id}}" class="collapse" attr.aria-labelledby="originPortData{{carrier_data.liner_id}}" attr.data-parent="#exportPort{{carrier_data.liner_id}}">
-                                    <div class="card-body costBreakup">
-                                        <div class="row" *ngFor="let origin_data of carrier_data.origin_port_handling_charges">
-                                            <div class="col-8">{{origin_data.type}}</div>
-                                            <div class="col-4 sub-price">{{origin_data.charges | currency: 'USD'}}</div>
-                                        </div>    
+                        <ng-template #error1>
+                            <div class="card mb-3 rbc card-xcv">
+                                <img class="card-img-top inm-card" src="../../assets/routeWrong.svg" alt="route-error">
+                                <div class="card-body">
+                                    <h3 class="card-title">No Quotes Found Between The Two Ports</h3>
+                                    <p class="card-text"><small class="text-muted">Get lower shipping rates by shipping everything in one container / ship’s hold.</small></p>
+                                </div>
+                            </div>
+                        </ng-template>
+                </ng-template>
+
+                <ng-template #success>
+                    <!-- container offers 1 -->
+                    <div class="card container-card-data card-xcv" *ngFor="let carrier_data of containerData.quotes">
+                                <div class="card-body card-padding-xcv">
+                                    <div class="row">
+                                        <div class="col-md-5 card-img-cont">
+                                            <img class="cont_id" src="../../assets/{{carrier_data.liner_image_id}}" alt={{carrier_data.liner_image_id}}>
+                                            <br><br>
+                                            <img class="cont_comp" src="../../assets/{{carrier_data.liner_image}}" alt={{carrier_data.liner_image}}>
+                                            <img *ngIf="reeferTrue" class="ref-sym" src="../../assets/REFEER.png" alt="ref">
+                                        </div>
+                                        <div class="col-md-7">
+                                            <h5 class="card-title">{{carrier_data.liner_name}}</h5>
+                                            <h6 class="card-subtitle mb-2 text-muted">{{containerData.container_type}} | Liner Terms: {{carrier_data.liner_terms}}</h6>
+                                            <p class="card-text card-price">{{carrier_data.total_quote_price | currency:'USD'}}</p>
+                                            <a href="#" class="btn btn-primary btn-qs" data-toggle="modal" data-target="#confirmBooking" (click)="getBooking(carrier_data.liner_id, containerData.from_port, containerData.to_port, carrier_data.liner_name, carrier_data.total_quote_price, carrier_data.liner_image_id, carrier_data.liner_image, containerData.container_type)">Book Now</a>
+                                            <a id="show_details{{carrier_data.liner_id}}" class="btn btn-light btn-qs" data-toggle="collapse" href="#more_details{{carrier_data.liner_id}}" role="button" aria-expanded="false" aria-controls="more_details" (click)="changeDetails($event)">View Details</a>
+                                        </div>
                                     </div>
-                                </div>
+                                    <!-- End of Shipping card -->
 
-                                <!-- end of card body1 -->
-                            </div>
+                                    <!-- breakup of charges -->
+                                    <!-- breakup of charges -->
+                                    <div class="collapse multi-collapse" id="more_details{{carrier_data.liner_id}}">
 
-                            <!-- ocean charge -->
-                            <div class="card">
-                                <div class="card-header" id="oceanChrgsData{{carrier_data.liner_id}}">
-                                    <h5 class="mb-0">
-                                        <a class="accord" data-toggle="collapse" attr.data-target="#oceanChrgs{{carrier_data.liner_id}}" aria-expanded="true" attr.aria-controls="oceanChrgs{{carrier_data.liner_id}}">
-                                            <div class="row card-title accord-title">
-                                                <div class="col-1 thumb-icons"><img id="shipicon" src="../../assets/shiplogo.svg" width="40px" height="40px" alt="shipIcon"></div>
-                                                <div class="col-7">
-                                                    {{containerData.from_port}} - {{containerData.to_port}} Ocean Charges
-                                                    <h6 class="card-subtitle mb-2 text-muted detls">{{containerData.distance}} nautical miles <br> Transit Time: {{containerData.time}}</h6>
-                                                </div>
-                                                <div class="col-4 accord-title-price">{{carrier_data.ocean_chrgs | currency: 'USD'}}</div>
+                                        <!-- accordion starts here -->
+                                        <div class="accordion exportPort-accordion" id="exportPort{{carrier_data.liner_id}}">
+
+                                            <!-- port of origin -->
+                                            <div class="card">
+                                                <div class="card-header" id="originPortData{{carrier_data.liner_id}}">
+                                                <h5 class="mb-0">
+                                                    <a class="accord" data-toggle="collapse" attr.data-target="#collapseOne{{carrier_data.liner_id}}" aria-expanded="true" attr.aria-controls="collapseOne{{carrier_data.liner_id}}">
+                                                        <div class="row card-title accord-title">
+                                                            <div class="col-1 thumb-icons"><img id="shipicon" src="../../assets/container.svg" width="40px" height="40px" alt="shipIcon"></div>
+                                                            <div class="col-8">
+                                                                {{containerData.from_port}} - Origin Port Handling Charges
+                                                                <h6 class="card-subtitle mb-2 text-muted detls">Transit Time: 2-4 days</h6>
+                                                            </div>
+                                                            <div class="col-3 accord-title-price">{{carrier_data.origin_chrgs | currency: 'USD'}}</div>
+                                                        </div>
+                                                    </a>
+                                                </h5>
                                             </div>
-                                        </a>
-                                    </h5>
-                                </div>
 
-                                <!-- accordion header2 ends -->
-                                    
-                                <div id="oceanChrgs{{carrier_data.liner_id}}" class="collapse" attr.aria-labelledby="oceanChrgsData{{carrier_data.liner_id}}" attr.data-parent="#exportPort{{carrier_data.liner_id}}">
-                                    <div class="card-body costBreakup">
-                                        <div class="row" *ngFor="let ocn_data of carrier_data.ocean_charges">
-                                            <div class="col-8">{{ocn_data.type}}</div>
-                                            <div class="col-4 sub-price">{{ocn_data.charges | currency: 'USD'}}</div>
-                                        </div>   
-                                            
-                                    </div>
-                                </div>
+                                            <!-- accordion header1 ends -->
 
-                            <!-- end of card body2 -->
-                            </div>
-
-
-                            <!-- port of discharge -->
-                            <div class="card">
-                                    <div class="card-header" id="dischargePortData{{carrier_data.liner_id}}">
-                                    <h5 class="mb-0">
-                                        <a class="accord" data-toggle="collapse" attr.data-target="#dischargePort{{carrier_data.liner_id}}" aria-expanded="true" attr.aria-controls="dischargePort{{carrier_data.liner_id}}">
-                                            <div class="row card-title accord-title">
-                                                <div class="col-1 thumb-icons"><img id="shipicon" src="../../assets/container.svg" width="40px" height="40px" alt="shipIcon"></div>
-                                                <div class="col-8">
-                                                    {{containerData.to_port}} - Delivery Port Handling Charges
-                                                    <h6 class="card-subtitle mb-2 text-muted detls">Transit Time: 2-4 days</h6>
+                                            <div id="collapseOne{{carrier_data.liner_id}}" class="collapse" attr.aria-labelledby="originPortData{{carrier_data.liner_id}}" attr.data-parent="#exportPort{{carrier_data.liner_id}}">
+                                                <div class="card-body costBreakup">
+                                                    <div class="row" *ngFor="let origin_data of carrier_data.origin_port_handling_charges">
+                                                        <div class="col-8">{{origin_data.type}}</div>
+                                                        <div class="col-4 sub-price">{{origin_data.charges | currency: 'USD'}}</div>
+                                                    </div>
                                                 </div>
-                                                <div class="col-3 accord-title-price">{{carrier_data.delivery_chrgs | currency: 'USD'}}</div>
                                             </div>
-                                        </a>
-                                    </h5>
-                                </div>
 
-                                <!-- accordion header3 ends -->
-                                
-                                <div id="dischargePort{{carrier_data.liner_id}}" class="collapse" attr.aria-labelledby="dischargePortData{{carrier_data.liner_id}}" attr.data-parent="#exportPort{{carrier_data.liner_id}}">
-                                    <div class="card-body costBreakup">
-                                        <div class="row" *ngFor="let delivery_data of carrier_data.delivery_port_charges">
-                                            <div class="col-8">{{delivery_data.type}}</div>
-                                            <div class="col-4 sub-price">{{delivery_data.charges | currency: 'USD'}}</div>
-                                        </div> 
-                
+                                            <!-- end of card body1 -->
+                                        </div>
+
+                                        <!-- ocean charge -->
+                                        <div class="card">
+                                            <div class="card-header" id="oceanChrgsData{{carrier_data.liner_id}}">
+                                                <h5 class="mb-0">
+                                                    <a class="accord" data-toggle="collapse" attr.data-target="#oceanChrgs{{carrier_data.liner_id}}" aria-expanded="true" attr.aria-controls="oceanChrgs{{carrier_data.liner_id}}">
+                                                        <div class="row card-title accord-title">
+                                                            <div class="col-1 thumb-icons"><img id="shipicon" src="../../assets/shiplogo.svg" width="40px" height="40px" alt="shipIcon"></div>
+                                                            <div class="col-7">
+                                                                {{containerData.from_port}} - {{containerData.to_port}} Ocean Charges
+                                                                <h6 class="card-subtitle mb-2 text-muted detls">{{containerData.distance}} nautical miles <br> Transit Time: {{containerData.time}}</h6>
+                                                            </div>
+                                                            <div class="col-4 accord-title-price">{{carrier_data.ocean_chrgs | currency: 'USD'}}</div>
+                                                        </div>
+                                                    </a>
+                                                </h5>
+                                            </div>
+
+                                            <!-- accordion header2 ends -->
+
+                                            <div id="oceanChrgs{{carrier_data.liner_id}}" class="collapse" attr.aria-labelledby="oceanChrgsData{{carrier_data.liner_id}}" attr.data-parent="#exportPort{{carrier_data.liner_id}}">
+                                                <div class="card-body costBreakup">
+                                                    <div class="row" *ngFor="let ocn_data of carrier_data.ocean_charges">
+                                                        <div class="col-8">{{ocn_data.type}}</div>
+                                                        <div class="col-4 sub-price">{{ocn_data.charges | currency: 'USD'}}</div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+
+                                        <!-- end of card body2 -->
+                                        </div>
+
+
+                                        <!-- port of discharge -->
+                                        <div class="card">
+                                                <div class="card-header" id="dischargePortData{{carrier_data.liner_id}}">
+                                                <h5 class="mb-0">
+                                                    <a class="accord" data-toggle="collapse" attr.data-target="#dischargePort{{carrier_data.liner_id}}" aria-expanded="true" attr.aria-controls="dischargePort{{carrier_data.liner_id}}">
+                                                        <div class="row card-title accord-title">
+                                                            <div class="col-1 thumb-icons"><img id="shipicon" src="../../assets/container.svg" width="40px" height="40px" alt="shipIcon"></div>
+                                                            <div class="col-8">
+                                                                {{containerData.to_port}} - Delivery Port Handling Charges
+                                                                <h6 class="card-subtitle mb-2 text-muted detls">Transit Time: 2-4 days</h6>
+                                                            </div>
+                                                            <div class="col-3 accord-title-price">{{carrier_data.delivery_chrgs | currency: 'USD'}}</div>
+                                                        </div>
+                                                    </a>
+                                                </h5>
+                                            </div>
+
+                                            <!-- accordion header3 ends -->
+
+                                            <div id="dischargePort{{carrier_data.liner_id}}" class="collapse" attr.aria-labelledby="dischargePortData{{carrier_data.liner_id}}" attr.data-parent="#exportPort{{carrier_data.liner_id}}">
+                                                <div class="card-body costBreakup">
+                                                    <div class="row" *ngFor="let delivery_data of carrier_data.delivery_port_charges">
+                                                        <div class="col-8">{{delivery_data.type}}</div>
+                                                        <div class="col-4 sub-price">{{delivery_data.charges | currency: 'USD'}}</div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+
+                                            <!-- end of card body3 -->
+                                        </div>
+
+                                        <!-- accordion body ends -->
                                     </div>
+
                                 </div>
-
-                                <!-- end of card body3 -->
+                                <!-- end of shipping card body -->
                             </div>
-
-                            <!-- accordion body ends -->
-                        </div>
-
-                    </div>
-                    <!-- end of shipping card body -->
-                </div>
-            </div>  <!-- end of container offer 5 -->
-
-
+                    </div>  <!-- end of container offer 1 -->
+                </ng-template>
 
         </div>
     </div>
@@ -233,20 +266,49 @@
 
 
 
-<!-- The Modal -->
-<div id="myModal" class="modal">
+
+<!-- Modal -->
+<div class="modal fade" id="confirmBooking" tabindex="-1" role="dialog" aria-labelledby="modalTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+        <div class="modal-header">
+            <img src="../../assets/book.svg" class="modal-im" alt="booking_icon">
+            <h4 class="modal-title" id="modalTitle"><b>Confirm Booking</b></h4>
+             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <p>Are you sure that you want this order to be placed?</p>
+            <small *ngIf="bookingDat"><b>Digital Fingerprint: {{bookingDat.booking_id}}</b></small>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary btn-qs" data-dismiss="modal">Cancel</button>
+            <button type="button" class="btn btn-primary btn-qs" (click)="proceedToBook(bookingDat)" data-dismiss="modal">Proceed to Checkout</button>
+        </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+<!-- The Modal Alert -->
+<div id="alertModal" class="modal-alert">
 
     <!-- Modal content -->
-    <div class="modal-content">
-      <div class="modal-header">
+    <div class="modal-content-alert">
+      <div class="modal-header-alert">
         <h2>Oh! There are Errors!</h2>
         <span class="close" (click)="exitModal()">&times;</span>
       </div>
-      <div class="modal-header">
+      <div class="modal-header-alert">
         <p>{{alert_text}}</p>
       </div>
     </div>
-  
+
 </div>
 
 

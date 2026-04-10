@@ -1,0 +1,174 @@
+<div class="container-fluid allTx">
+  <div class="jumbotron-fluid headings-allTrans">
+    <br><br><br>
+    <h1 class="display-3">All Transactions</h1>
+    <h5 class="display-5">List of Present and Previous Transactions</h5>
+    <br><br>
+  </div>
+
+
+  <ng-container *ngIf="allTzx; else elseTemplate">
+      <div class="main-content">
+          <div class="invoices" *ngFor="let txn of allTzx.allTx">
+
+            <!-- start of invoice card -->
+            <br><br>
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title">Booking Fingerprint: <b>{{txn.awb}}</b></h4>
+                    <br>
+                    <h6 class="card-subtitle mb-2 text-muted">Customer Name: <b> {{txn.first_name}} {{txn.last_name}} </b></h6>
+                    <h6 class="card-subtitle mb-2 text-muted">Telephone: <b> {{txn.telephone}} </b></h6>
+                    <h6 class="card-subtitle mb-2 text-muted">E-mail: <b> {{txn.email}} </b></h6>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-5 card-img-cont">
+                            <img class="cont_id" src="../assets/{{txn.cont_id}}" alt={{txn.cont_id}}>
+                        </div>
+                        <div class="col-md-7">
+                            <h4 class="card-title">{{txn.freight_services_name}}</h4>
+                            <h6 class="card-subtitle mb-2 text-muted">
+                                <h6 class="card-subtitle mb-2 text-muted">Shipment Type: <b>{{txn.shpmt_name}} - {{txn.shipment_type}} </b></h6>
+                            </h6>
+                            <p class="card-text card-price">{{txn.quote_price | currency:'USD'}}</p>
+                            <h6 class="card-subtitle mb-2 text-muted">Origin Port: <b> {{txn.from_p_name}} </b></h6>
+                            <h6 class="card-subtitle mb-2 text-muted">Discharge Port: <b> {{txn.to_p_name}} </b></h6>
+                            <h6 class="card-subtitle mb-2 text-muted">Pickup Date: <b> {{txn.shipmentDate | date:'medium'}} </b></h6>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <div class="row">
+                        <!-- ng-if template starts here -->
+                        <ng-container *ngIf="txn.isCancled == 0; else elseTemplate">
+                            <div class="col-md-8">
+                                <h4 class="card-subtitle-2 mb-2">Transaction Hash: <b>{{txn.transactionHash}}</b></h4>
+                                <h4 class="card-subtitle-2 mb-2">Invoice Number: <b>Not Yet Generated.</b></h4>
+                            </div>
+                            <div class="col-md-2 i-status">
+                                <h6>STATUS</h6>
+                                <h3><span class="badge badge-pill badge-warning">Pending</span></h3>
+                            </div>
+                            <div class="col-md-2 i-download">
+                                <br>
+                                <button type="button" class="btn btn-dark" disabled>Invoice</button>
+                            </div>
+                          </ng-container>
+                          <ng-template #elseTemplate>
+                            <ng-container *ngIf="txn.isCancled == 1; else elseTemplate1">
+                                <div class="col-md-8">
+                                    <h4 class="card-subtitle-2 mb-2">Transaction Hash: <b>Transaction Cancled.</b></h4>
+                                    <h4 class="card-subtitle-2 mb-2">Invoice Number: <b>Transaction Cancled.</b></h4>
+                                </div>
+                                <div class="col-md-2 i-status">
+                                    <h6>STATUS</h6>
+                                    <h3><span class="badge badge-pill badge-danger">Cancled</span></h3>
+                                </div>
+                                <div class="col-md-2 i-download">
+                                    <br>
+                                </div>
+                            </ng-container>
+                            <ng-template #elseTemplate1>
+                                <div class="col-md-8">
+                                    <h4 class="card-subtitle-2 mb-2">Transaction Hash: <b>{{txn.transactionHash}}</b></h4>
+                                    <h4 class="card-subtitle-2 mb-2">Invoice Number: <b>{{txn.invoiceNumber}}</b></h4>
+                                </div>
+                                <div class="col-md-2 i-status">
+                                    <h6>STATUS</h6>
+                                    <h3><span class="badge badge-pill badge-success">Approved</span></h3>
+                                </div>
+                                <div class="col-md-2 i-download">
+                                    <br>
+                                    <button type="button" class="btn btn-dark" (click)="generateInvoice(txn.awb)">Invoice</button>
+                                </div>
+                            </ng-template>
+                          </ng-template>
+                        <!-- ng if template ends here -->
+
+
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- end of invoice card -->
+          </div>
+
+          <!-- table view deprecated -->
+          <!-- <div class="table-container">
+              <table class="table">
+                  <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">AWB</th>
+                        <th scope="col">Origin Port</th>
+                        <th scope="col">Discharge Port</th>
+                        <th scope="col">Freight Carrier</th>
+                        <th scope="col">Shipment Type</th>
+                        <th scope="col">Pickup Date</th>
+                        <th scope="col">Total Amount</th>
+                        <th scope="col">Customer Name</th>
+                        <th scope="col">Contact No.</th>
+                        <th scope="col">E-mail</th>
+                        <th scope="col">Tx Hash</th>
+                        <th scope="col">Invoice No.</th>
+                        <th scope="col">Status</th>
+                        <th scope="col">Downloads</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let txn of allTzx.allTx">
+                      <td>{{txn.awb}}</td>
+                      <td>{{txn.from_p_name}}</td>
+                      <td>{{txn.to_p_name}}</td>
+                      <td>{{txn.freight_services_name}}</td>
+                      <td>{{txn.shipment_type}}</td>
+                      <td>{{txn.shipmentDate | date}}</td>
+                      <td>{{txn.quote_price | currency:'USD'}}</td>
+                      <td>{{txn.first_name}} {{txn.last_name}}</td>
+                      <td>{{txn.telephone}}</td>
+                      <td>{{txn.email}}</td>
+                      <td>{{txn.transactionHash}}</td>
+
+                      <ng-container *ngIf="txn.isCancled == 0; else elseTemplate">
+                        <td>Not Yet Generated</td>
+                        <td><span class="badge badge-pill badge-warning">Pending</span></td>
+                        <td><button type="button" class="btn btn-dark" disabled>Invoice</button></td>
+                      </ng-container>
+                      <ng-template #elseTemplate>
+                        <ng-container *ngIf="txn.isCancled == 1; else elseTemplate1">
+                          <td>Transaction Cancled</td>
+                          <td><span class="badge badge-pill badge-danger">Cancled</span></td>
+                          <td></td>
+                        </ng-container>
+                        <ng-template #elseTemplate1>
+                          <td>{{txn.invoiceNumber}}</td>
+                          <td><span class="badge badge-pill badge-success">Approved</span></td>
+                          <td><button type="button" class="btn btn-dark" (click)="generateInvoice(txn.awb)">Invoice</button></td>
+                        </ng-template>
+                      </ng-template>
+
+                    </tr>
+                  </tbody>
+                </table>
+          </div> -->
+        </div>
+  </ng-container>
+  <ng-template #elseTemplate>
+      <div class="container-fluid nist">
+        <div class="jumbotron error">
+          <br><br>
+          <h1 class="display-3"> ;( Well this is quite embarrasing! </h1>
+          <p> Seems like you have visited a broken link or expired link! </p>
+          <br><br><br>
+          <p class="lead">
+            <a class="btn btn-primary btn-lg" routerLink="/" routerLinkActive="active" role="button">Take me to Home!</a>
+          </p>
+          <br>
+        </div>
+      </div>
+  </ng-template>
+
+
+</div>

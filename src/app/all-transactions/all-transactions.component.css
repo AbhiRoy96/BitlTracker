@@ -1,0 +1,112 @@
+@import url("https://fonts.googleapis.com/css?family=Noto+Sans:400,700");
+
+body {
+  font-family: "Noto Sans", sans-serif;
+}
+
+.text-muted {
+  font-size: 1em;
+  color: #464646 !important;
+}
+
+.btn {
+  border-radius: 0;
+}
+
+.card-title {
+  color: #0b7fff;
+}
+
+.card-subtitle-2 {
+  font-size: 1.15rem !important;
+}
+
+.card-price {
+  margin-top: 1rem;
+  margin-bottom: 2rem;
+  font-size: 1.25em;
+}
+
+.i-status,
+.i-download {
+  text-align: center;
+}
+
+.i-status h6 {
+  font-size: 0.8em;
+}
+
+.allTx {
+  padding: 0 !important;
+}
+
+.headings-allTrans {
+  background: #101115; /* For browsers that do not support gradients */
+  background: -webkit-linear-gradient(
+    left top,
+    #101115,
+    #101823
+  ); /* For Safari 5.1 to 6.0 */
+  background: -o-linear-gradient(
+    bottom right,
+    #101115,
+    #101823
+  ); /* For Opera 11.1 to 12.0 */
+  background: -moz-linear-gradient(
+    bottom right,
+    #101115,
+    #101823
+  ); /* For Firefox 3.6 to 15 */
+  background: linear-gradient(
+    to bottom right,
+    #101115,
+    #101823
+  ); /* Standard syntax */
+
+  padding-top: 3em;
+  padding-bottom: 1em;
+  color: #007bff;
+  text-align: center;
+}
+
+.headings-allTrans h5 {
+  color: #9900ff;
+}
+
+.main-content {
+  padding: 5em 2.5em 5em 2.5em;
+  min-height: 60vh;
+}
+
+.cont_id{
+  width: inherit !important;
+}
+
+
+
+.lead{
+  margin-top: 2vh;
+  margin-bottom: 1vh;
+  font-size: 1.50rem;
+  color:#e8f3ff;
+}
+
+.nist{
+  padding: 0;
+}
+
+.error{
+  background: #101115; /* For browsers that do not support gradients */
+  background: -webkit-linear-gradient(left top, #101115, #101823); /* For Safari 5.1 to 6.0 */
+  background: -o-linear-gradient(bottom right, #101115, #101823); /* For Opera 11.1 to 12.0 */
+  background: -moz-linear-gradient(bottom right, #101115, #101823); /* For Firefox 3.6 to 15 */
+  background: linear-gradient(to bottom right, #101115, #101823); /* Standard syntax */
+
+  text-align: center;
+  color: #0175f1;
+  border-radius: 0;
+}
+
+/* .table-container{
+  overflow-x: scroll;
+} */
