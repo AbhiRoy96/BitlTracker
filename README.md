@@ -92,6 +92,9 @@ Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.
 ### Running End-to-End Tests
 Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
 
+### Backend 
+For backend of this Application look at -> [BitlTrackerBackend](https://github.com/AbhiRoy96/BitlTrackerBackend).
+
 ## 📜 License
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
